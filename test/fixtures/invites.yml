@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  p_email: MyString
+  waiting: false
+  accept_invitation: false
+
+two:
+  user_id: 1
+  p_email: MyString
+  waiting: false
+  accept_invitation: false

@@ -11,7 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140115175345) do
+ActiveRecord::Schema.define(:version => 20140115212222) do
+
+  create_table "invites", :force => true do |t|
+    t.integer  "user_id",                              :null => false
+    t.string   "p_email",                              :null => false
+    t.boolean  "waiting",           :default => true,  :null => false
+    t.boolean  "accept_invitation", :default => false, :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.text     "message"
+  end
+
+  add_index "invites", ["user_id", "p_email"], :name => "index_invites_on_user_id_and_p_email", :unique => true
+  add_index "invites", ["user_id"], :name => "index_invites_on_user_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -24,6 +37,8 @@ ActiveRecord::Schema.define(:version => 20140115175345) do
     t.datetime "confirmation_sent_at"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "first_name",                             :null => false
+    t.string   "last_name",                              :null => false
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

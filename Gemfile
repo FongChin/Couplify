@@ -5,7 +5,7 @@ gem 'rails', '3.2.15'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+gem 'pg'
 
 
 # Gems used only for assets and not required
@@ -22,8 +22,10 @@ end
 
 gem 'devise'
 gem 'jquery-rails'
+gem 'launchy'
 
 group :development do
+  gem 'letter_opener'
   gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
