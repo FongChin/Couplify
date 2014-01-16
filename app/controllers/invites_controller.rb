@@ -27,8 +27,7 @@ class InvitesController < ApplicationController
   def make_decision
     has_current_invitation = Invite.has_current_invitation?(current_user)
     if has_current_invitation
-      @invite = Invite.find_by_p_email(current_user.email)
-      @inviter = User.find(@invite.user_id)
+      @invites = Invite.where(:p_email => current_user.email)
       render 'make_decision'
     else
       redirect_to new_invite_url
@@ -41,9 +40,12 @@ class InvitesController < ApplicationController
     if @invite.update_attributes(params[:invite])
       # email inviter about the acceptance?
       if @invite.accept_invitation
+        # reject other invitations
+        @invite.reject_other_invitations
+        
         @couple = Couple.create_couple(@invite.user_id, current_user.id)
         if @couple.save
-          redirect_to "#{root_url}profile/#{@couple.profile_name}"
+          redirect_to "#{root_url}couples/#{couple.profile_name}"
         else
           render :text => "something is wrong"
         end

@@ -19,4 +19,13 @@ class Invite < ActiveRecord::Base
     @invites = Invite.where("p_email = ? AND waiting = ?", user.email, true)
     (@invites.empty?)? false : true
   end
+  
+  def reject_other_invitations
+    @invitations = Invite.where(:p_email => self.p_email)
+    @invitations.each do |invite|
+      invite.waiting = false
+      invite.accept_invitation = false
+      invite.save
+    end
+  end
 end

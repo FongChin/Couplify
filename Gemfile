@@ -24,6 +24,9 @@ gem 'devise'
 gem 'jquery-rails'
 gem 'launchy'
 gem 'figaro'
+gem 'backbone-on-rails'
+gem 'oj'
+gem 'ejs'
 
 group :development do
   gem 'letter_opener'
@@ -38,7 +41,7 @@ gem 'rails_12factor', group: :production
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
-# gem 'jbuilder'
+gem 'jbuilder'
 
 # Use unicorn as the app server
 # gem 'unicorn'

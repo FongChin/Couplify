@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     elsif @invites.empty? && !Invite.has_current_invitation?(resource)
       return new_invite_url
     else #if @invites.waiting && !@invites.accept_invitation
-      return waiting_invite_url(@invite)
+      return waiting_invite_url(@invites.first)
     end
   end
   
