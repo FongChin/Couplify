@@ -1,0 +1,19 @@
+class Couple < ActiveRecord::Base
+  attr_accessible :anniversary_date, :profile_name, :u1_id, :u2_id
+  
+  validates :profile_name, :uniqueness => true, :presence => true
+  validates :u1_id, :u2_id, :presence => true
+  
+  belongs_to :u1, :class_name => "User", :primary_key => :id, :foreign_key => :u1_id
+  belongs_to :u2, :class_name => "User", :primary_key => :id, :foreign_key => :u2_id
+  
+  def self.create_couple(inviter_id, invitee_id)
+    Couple.new({:u1_id => inviter_id, :u2_id => invitee_id, 
+                          :profile_name => Time.now.to_i.to_s })
+  end
+  
+  def self.user_has_profile?(user_id)
+    @couples = Couple.where("u1_id = ? OR u2_id = ?", user_id, user_id)
+    (@couples.empty?)? false : true
+  end
+end

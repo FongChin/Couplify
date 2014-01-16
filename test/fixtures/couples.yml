@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  u1_id: 1
+  u2_id: 1
+  anniversary_date: 2014-01-15
+  profile_name: MyString
+
+two:
+  u1_id: 1
+  u2_id: 1
+  anniversary_date: 2014-01-15
+  profile_name: MyString

@@ -9,16 +9,17 @@
 <body>
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
+<% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+    <p><%= error %></p>
+  <% end %>
+<% end %>
 <% if current_user %>
   <%= current_user.first_name %>
   <%= button_to("Sign Out", destroy_user_session_url, 
       {:method => :delete, :class => "btn btn-primary"})%>
 <% end %>
-<% if flash[:errors] %>
-  <% flash[:errors].each do |error| %>
-    <%= error %>
-  <% end %>
-<% end %>
+
 <div id="container">
   <div id="row">
     <%= yield %>

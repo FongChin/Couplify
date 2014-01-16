@@ -12,10 +12,46 @@ class InvitesController < ApplicationController
       # send an email to the partner
       @msg = InviteEmailMailer.invite_email(@invite)
       @msg.deliver!
-      redirect_to new_invite_url
+      redirect_to waiting_invite_url(@invite)
     else
       flash.now[:errors] = @invite.errors.full_messages
       render 'new'
+    end
+  end
+  
+  def waiting
+    @invite = Invite.find(params[:id])
+    render 'waiting'
+  end
+  
+  def make_decision
+    has_current_invitation = Invite.has_current_invitation?(current_user)
+    if has_current_invitation
+      @invite = Invite.find_by_p_email(current_user.email)
+      @inviter = User.find(@invite.user_id)
+      render 'make_decision'
+    else
+      redirect_to new_invite_url
+    end
+  end
+  
+  def update
+    @invite = Invite.find(params[:id])
+    params[:invite][:waiting] = false
+    if @invite.update_attributes(params[:invite])
+      # email inviter about the acceptance?
+      if @invite.accept_invitation
+        @couple = Couple.create_couple(@invite.user_id, current_user.id)
+        if @couple.save
+          redirect_to "#{root_url}profile/#{@couple.profile_name}"
+        else
+          render :text => "something is wrong"
+        end
+      else
+        redirect_to new_invite_url
+      end
+    else
+      redirect_to new_invite_url
     end
     
   end
