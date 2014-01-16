@@ -23,6 +23,7 @@ end
 gem 'devise'
 gem 'jquery-rails'
 gem 'launchy'
+gem 'figaro'
 
 group :development do
   gem 'letter_opener'
