@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
   
   has_many :invitations, :class_name => "Invite", :foreign_key => :user_id
   
+  def self.get_id_from_email(email) 
+    User.find_by_email(email)
+  end
+  
   def couple
     Couple.where('u1_id = ? OR u2_id = ?', self.id, self.id).first
   end

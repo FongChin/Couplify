@@ -187,6 +187,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   letter_opener
+  mail
   oj
   paperclip
   pg

@@ -18,4 +18,15 @@ class Couple < ActiveRecord::Base
     @couples = Couple.where("u1_id = ? OR u2_id = ?", user_id, user_id)
     (@couples.empty?)? false : true
   end
+  
+  def self.get_couple_id(emails)
+    email_arr = emails.split(", ")
+    email_arr.each do |email|
+      next unless email =~ /@couplify.me$/
+      profile_name = email.gsub(/@couplify.me$/, "")
+      return Couple.find_by_profile_name(profile_name)
+    end
+  end
+  
+  
 end

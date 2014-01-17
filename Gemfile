@@ -29,6 +29,7 @@ gem 'oj'
 gem 'ejs'
 gem 'paperclip'
 gem 'aws-sdk'
+gem 'mail'
 
 group :development do
   gem 'letter_opener'
