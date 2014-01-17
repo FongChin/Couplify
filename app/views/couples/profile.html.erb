@@ -5,15 +5,46 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit</h4>
+        <h4 class="modal-title">Edit Profile</h4>
       </div>
-      <div class="modal-body" id="edit-form-div">
-        <p>One fine body</p>
-        
+      <div class="modal-body" >
+        <div class="row">
+          <form action="<%= couple_url(@couple) %>" role="form" class="form-horizontal" id="edit-couple-form" method="POST">
+            <input type="hidden" name="_method" value="PUT"/> <!-- _method = put? -->
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+            <input type="hidden" id="old_profile_name" name="old_profile_name" value="<%= @couple.profile_name %>" />
+            <div class="form-group">
+              <label for="anniversary-date" class="col-xs-5 col-md-4 control-label">Anniversary</label>
+              <div class="col-xs-4 col-md-8">
+                <input type="date" class="form-control" 
+                        name="couple[anniversary_date]" value="<%= @couple.anniversary_date %>" />
+              </div>
+            </div>
+            <div class="form-group" id="profile-name-form-div">
+              <label for="profile-name" class="col-xs-5 col-md-4 control-label">Profile name/Couplify email</label>
+              <div class="col-xs-3 col-md-8">
+                <input type="text" class="form-control" id="couple_profile_name"
+                        name="couple[profile_name]" value="<%= @couple.profile_name %>" />
+              </div>
+            </div>
+            <div class="form-group hidden" id="profile-name-error-div">
+              <div class="col-xs-offset-3 col-xs-6">
+                <div style="padding: 5px;">
+                  <!-- <span class="glyphicon glyphicon-ban-circle"></span> -->
+                  <span id="profile-name-error-msg"></span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-offset-5 col-xs-6 ">
+                <button type="submit" class="btn btn-primary" id="submit-couple-edit">Save Changes</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-        <!-- <button type="button" class="btn btn-primary">Save Changes</button> -->
       </div>
     </div>
   </div>
@@ -22,6 +53,8 @@
 <% @couple.attributes.each do |attr_name, value| %>
   <p><%= attr_name %>: <%= value %></p>
 <% end %>
+
+<p>Anniversary: <span id="anniversary-date"><%= @couple.anniversary_date %></span></p>
 
 <script type="text/javascript">
   var COUPLE_ID = <%= @couple.id %>;

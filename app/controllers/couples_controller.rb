@@ -6,12 +6,16 @@ class CouplesController < ApplicationController
     render 'profile'
   end
   
+  def index
+    redirect_to after_sign_in_path_for(current_user)
+  end
+  
   def update
     @couple = Couple.find(params[:id])
     if @couple.update_attributes(params[:couple])
-      return :json => @couple
+      render :json => @couple
     else
-      return :json => {:status => :unprocessable_entity}
+      render :json => {:errors => @couple.errors }, :status => :unprocessable_entity
     end
   end
   

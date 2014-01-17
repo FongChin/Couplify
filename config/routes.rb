@@ -6,10 +6,11 @@ Couplify::Application.routes.draw do
     get "make_decision", :on => :collection
   end
   
-  resources :couples, :only => [:create, :update] do
+  resources :couples, :only => [:create, :update, :index] do
     collection do
       get ":profile_name", :to => "couples#profile", :as => :profile
     end
   end
-  root :to => "invites#new"
+    
+  root :to => "couples#index"
 end
