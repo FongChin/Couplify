@@ -1,7 +1,8 @@
 class IncomingEmailsController < ApplicationController
   
   def create
-    printa params["envelope"]
+    printa "action received"
+    printa params
     printa params["to"]
     printa params["text"]
     printa params["attachments"]
