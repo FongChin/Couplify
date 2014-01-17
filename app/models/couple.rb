@@ -19,8 +19,7 @@ class Couple < ActiveRecord::Base
     (@couples.empty?)? false : true
   end
   
-  def self.get_couple_id(emails)
-    email_arr = emails.split(", ")
+  def self.get_couple_id(email_arr)
     email_arr.each do |email|
       next unless email =~ /@couplify.me$/
       profile_name = email.gsub(/@couplify.me$/, "")

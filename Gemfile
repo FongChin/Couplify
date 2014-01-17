@@ -30,6 +30,7 @@ gem 'ejs'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'mail'
+gem 'rmagick'
 
 group :development do
   gem 'letter_opener'

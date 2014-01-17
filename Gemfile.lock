@@ -145,6 +145,7 @@ GEM
     rake (10.1.1)
     rdoc (3.12.2)
       json (~> 1.4)
+    rmagick (2.13.2)
     sass (3.2.13)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -194,5 +195,6 @@ DEPENDENCIES
   pry-rails
   rails (= 3.2.15)
   rails_12factor
+  rmagick
   sass-rails (~> 3.2.3)
   uglifier (>= 1.0.3)
