@@ -30,7 +30,7 @@ gem 'ejs'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'mail'
-gem 'rmagick'
+gem 'rmagick', :require => 'RMagick'
 
 group :development do
   gem 'letter_opener'
