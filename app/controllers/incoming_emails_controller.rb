@@ -6,8 +6,9 @@ class IncomingEmailsController < ApplicationController
     printa params["to"]
     printa params["text"]
     printa params["attachments"]
-    sender_id = User.get_id_from_email(params["envelope"]["from"])
-    couple_id = Couple.get_couple_id(params["envelope"]["to"])
+    printa params["attachment1"]
+    sender_id = User.get_id_from_email(params["from"])
+    couple_id = Couple.get_couple_id(params["to"])
     printa sender_id
     printa couple_id
     body = params["text"]
