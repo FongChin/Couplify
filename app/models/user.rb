@@ -6,8 +6,12 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :first_name,
-                  :last_name, :remember_me
-  # attr_accessible :title, :body
+                  :last_name, :profile_image, :remember_me
+
+  has_attached_file :profile_image, :styles => { 
+    :medium => "300x300>", 
+    :thumb => "100x100>" 
+  }, :default_url => "/images/:style/missing.jpeg"
   
   has_many :invitations, :class_name => "Invite", :foreign_key => :user_id
   

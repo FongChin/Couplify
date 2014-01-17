@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  couple_id: 1
+  body: MyText
+  image: 
+
+two:
+  couple_id: 1
+  body: MyText
+  image: 

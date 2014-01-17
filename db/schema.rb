@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140116002015) do
+ActiveRecord::Schema.define(:version => 20140117191728) do
 
   create_table "couples", :force => true do |t|
     t.integer  "u1_id",                                      :null => false
@@ -39,19 +39,37 @@ ActiveRecord::Schema.define(:version => 20140116002015) do
   add_index "invites", ["user_id", "p_email"], :name => "index_invites_on_user_id_and_p_email", :unique => true
   add_index "invites", ["user_id"], :name => "index_invites_on_user_id", :unique => true
 
+  create_table "messages", :force => true do |t|
+    t.integer  "couple_id",                          :null => false
+    t.text     "body",               :default => "", :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.integer  "user_id",                            :null => false
+  end
+
+  add_index "messages", ["couple_id"], :name => "index_messages_on_couple_id"
+
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                      :default => "", :null => false
+    t.string   "encrypted_password",         :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.string   "first_name",                             :null => false
-    t.string   "last_name",                              :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+    t.string   "first_name",                                 :null => false
+    t.string   "last_name",                                  :null => false
+    t.string   "profile_image_file_name"
+    t.string   "profile_image_content_type"
+    t.integer  "profile_image_file_size"
+    t.datetime "profile_image_updated_at"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

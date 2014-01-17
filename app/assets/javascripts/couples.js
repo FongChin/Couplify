@@ -6,9 +6,9 @@ $('document').ready(function(){
   $('#edit-couple-form').on('submit', function(event){
     event.preventDefault();
     var attribute = $('#edit-couple-form').serializeJSON();
-    console.log(attribute);
     $('#profile-name-error-div').addClass('hidden');
     $('#profile-name-form-div').removeClass('has-error');
+    
     $.ajax({
       type: "PUT",
 
@@ -17,7 +17,6 @@ $('document').ready(function(){
       data: attribute,
 
       success: function(data, textStatus, jqXHR){
-        console.log(data);
         // change data
         $('#anniversary-date').text(data.anniversary_date)
         $('#edit-couple-info').modal('hide');
@@ -27,8 +26,6 @@ $('document').ready(function(){
       },
 
       error: function(jqXHR){
-        console.log("request failed");
-        console.log(jqXHR.responseJSON.errors.profile_name);
         var profile_name_errors = jqXHR.responseJSON.errors.profile_name
         $.each(profile_name_errors, function(index, error_msg){
           $('#profile-name-error-msg').text("profile name " + error_msg);

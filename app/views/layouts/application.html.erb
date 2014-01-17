@@ -16,6 +16,7 @@
 <% end %>
 <% if current_user %>
   <%= current_user.first_name %>
+  <%= image_tag current_user.profile_image.url(:thumb) %>
   <%= button_to("Sign Out", destroy_user_session_url, 
       {:method => :delete, :class => "btn btn-primary"})%>
 <% end %>

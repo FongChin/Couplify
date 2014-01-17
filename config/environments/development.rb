@@ -38,4 +38,16 @@ Couplify::Application.configure do
   config.action_mailer.delivery_method = :letter_opener
   # in production, :host should be set to the actual host of the app
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  
+  config.action_mailer.raise_delivery_errors = true
+  
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => 'couplify-development',
+      :access_key_id => ENV['AMAZONS3_KEY_ID'],
+      :secret_access_key => ENV['AMAZONS3_SECRET_ACCESS_KEY'],
+      :s3_host_name => 's3-us-west-1.amazonaws.com'
+    }
+  }
 end

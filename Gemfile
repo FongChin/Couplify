@@ -27,6 +27,8 @@ gem 'figaro'
 gem 'backbone-on-rails'
 gem 'oj'
 gem 'ejs'
+gem 'paperclip'
+gem 'aws-sdk'
 
 group :development do
   gem 'letter_opener'

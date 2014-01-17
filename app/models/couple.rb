@@ -7,6 +7,8 @@ class Couple < ActiveRecord::Base
   belongs_to :u1, :class_name => "User", :primary_key => :id, :foreign_key => :u1_id
   belongs_to :u2, :class_name => "User", :primary_key => :id, :foreign_key => :u2_id
   
+  has_many :messages
+  
   def self.create_couple(inviter_id, invitee_id)
     Couple.new({:u1_id => inviter_id, :u2_id => invitee_id, 
                           :profile_name => Time.now.to_i.to_s })

@@ -11,6 +11,7 @@ Couplify::Application.routes.draw do
       get ":profile_name", :to => "couples#profile", :as => :profile
     end
   end
-    
+  
+  resource :incoming_email, :only => [:create]
   root :to => "couples#index"
 end
