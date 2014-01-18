@@ -10,8 +10,6 @@ class IncomingEmailsController < ApplicationController
         body = params["text"]
         attachment = params["attachment1"]
         if attachment
-          printa attachment
-          printa attachment.tempfile.to_path.to_s
           img = Magick::ImageList.new(attachment.tempfile.to_path.to_s)
           s3 = AWS::S3.new(:access_key_id => ENV['AMAZONS3_KEY_ID'], :secret_access_key => ENV['AMAZONS3_SECRET_ACCESS_KEY'])
 
@@ -34,6 +32,14 @@ class IncomingEmailsController < ApplicationController
           )
           if msg.save
             printa msg
+            begin
+              Pusher["couple_#{couple_id}"].trigger("new_message_event", { 
+                message: msg.to_json 
+              })
+            rescue Pusher::Error => e
+              # save it in the database?
+              printa Pusher::Error
+            end
           else
             raise msg.errors.full_messages
           end
