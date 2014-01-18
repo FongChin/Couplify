@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140118001925) do
+ActiveRecord::Schema.define(:version => 20140118214433) do
 
   create_table "couples", :force => true do |t|
     t.integer  "u1_id",                                      :null => false
@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(:version => 20140118001925) do
   add_index "couples", ["profile_name"], :name => "index_couples_on_profile_name", :unique => true
   add_index "couples", ["u1_id"], :name => "index_couples_on_u1_id", :unique => true
   add_index "couples", ["u2_id"], :name => "index_couples_on_u2_id", :unique => true
+
+  create_table "email_errors", :force => true do |t|
+    t.text     "error_msg"
+    t.text     "params"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "invites", :force => true do |t|
     t.integer  "user_id",                              :null => false

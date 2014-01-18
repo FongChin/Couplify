@@ -2,39 +2,46 @@ class IncomingEmailsController < ApplicationController
   
   def create
     printa "action received"
-    sender_id = User.get_id_from_email(params["from"])
-    couple_id = Couple.get_couple_id(params["to"])
-    if sender_id && couple_id
-      body = params["text"]
-      attachment = params["attachment1"]
-      if attachment
-        printa attachment
-        printa attachment.tempfile.to_path.to_s
-        img = Magick::ImageList.new(attachment.tempfile.to_path.to_s)
-        s3 = AWS::S3.new(:access_key_id => ENV['AMAZONS3_KEY_ID'], :secret_access_key => ENV['AMAZONS3_SECRET_ACCESS_KEY'])
-      
-        filename = attachment.original_filename.split(" ").join("_")
-      
-        key = "couples/#{couple_id}/#{filename}_#{Time.now.to_i}"
-        s3_img = s3.buckets["couplify-development"].objects[key].write(
-          img.to_blob, {:acl => :public_read}
-        )
-        img_url = "https://s3-us-west-1.amazonaws.com/couplify-development/#{s3_img.key}"
+    
+    begin
+      sender_id = User.get_id_from_email(params["from"])
+      couple_id = Couple.get_couple_id(params["to"])
+      if sender_id && couple_id
+        body = params["text"]
+        attachment = params["attachment1"]
+        if attachment
+          printa attachment
+          printa attachment.tempfile.to_path.to_s
+          img = Magick::ImageList.new(attachment.tempfile.to_path.to_s)
+          s3 = AWS::S3.new(:access_key_id => ENV['AMAZONS3_KEY_ID'], :secret_access_key => ENV['AMAZONS3_SECRET_ACCESS_KEY'])
 
-        msg = Message.new(
-          :couple_id => couple_id,
-          :user_id => sender_id,
-          :body => body,
-          :image_url => img_url
-        )
-        # if msg.save
-        #   # render :text => "success"
-        #   
-        # end
+          filename = attachment.original_filename.split(" ").join("_")
+
+          key = "couples/#{couple_id}/#{filename}_#{Time.now.to_i}"
+          s3_img = s3.buckets["couplify-development"].objects[key].write(
+            img.to_blob, {:acl => :public_read}
+          )
+          img_url = "https://s3-us-west-1.amazonaws.com/couplify-development/#{s3_img.key}"
+
+          msg = Message.new(
+            :couple_id => couple_id,
+            :user_id => sender_id,
+            :body => body,
+            :image_url => img_url
+          )
+          if msg.save
+            render :text => "success"
+          end
+        end
+      else
+        raise 'either sender id or couple id is nil'
       end
-      
+            
+    rescue => e
+      email_error = EmailError.new(:params => params, :error_msg => e.message)
+      email_error.save!
+      render :text => "saved the error in the database"
     end
-    render :text => "..."
   end
   
   def printa(a)
