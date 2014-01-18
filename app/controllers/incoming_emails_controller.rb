@@ -18,14 +18,10 @@ class IncomingEmailsController < ApplicationController
       s3 = AWS::S3.new(:access_key_id => ENV['AMAZONS3_KEY_ID'], :secret_access_key => ENV['AMAZONS3_SECRET_ACCESS_KEY'])
       
       p "filename"
-      printa attachment.original_filename
+      filename = attachment.original_filename.split(" ").join("_")
+      printa filename
       
-      p "headers"
-      printa attachment.headers
-      p "attachment path"
-      printa attachment[:tempfile].path
-      
-      key = "couples/#{couple_id}/#{attachment.filename}"
+      key = "couples/#{couple_id}/#{filename}"
       s3_img = s3.buckets["couplify-development"].objects[key].write(
         img.to_blob, {:acl => :public_read}
       )
