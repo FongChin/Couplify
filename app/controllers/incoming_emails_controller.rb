@@ -27,10 +27,10 @@ class IncomingEmailsController < ApplicationController
           :body => body,
           :image_url => img_url
         )
-        if msg.save
-          # render :text => "success"
-          
-        end
+        # if msg.save
+        #   # render :text => "success"
+        #   
+        # end
       end
       
     end
