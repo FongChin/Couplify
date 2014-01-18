@@ -45,7 +45,7 @@ class InvitesController < ApplicationController
         
         @couple = Couple.create_couple(@invite.user_id, current_user.id)
         if @couple.save
-          redirect_to "#{root_url}couples/#{couple.profile_name}"
+          redirect_to "#{root_url}couples/#{@couple.profile_name}"
         else
           render :text => "something is wrong"
         end
