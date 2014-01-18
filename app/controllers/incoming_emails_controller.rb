@@ -31,6 +31,8 @@ class IncomingEmailsController < ApplicationController
           )
           if msg.save
             render :text => "success"
+          else
+            raise msg.errors.full_messages
           end
         end
       else
