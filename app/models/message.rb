@@ -1,7 +1,10 @@
 class Message < ActiveRecord::Base
-  attr_accessible :body, :couple_id, :image
+  attr_accessible :body, :couple_id, :image, :user_id
+  
+  validates :user_id, :couple_id, :presence => true
   
   belongs_to :couple
+  belongs_to :owner
   
   has_attached_file :image, :styles => {
     :big => "600x600>",

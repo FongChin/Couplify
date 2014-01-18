@@ -25,7 +25,7 @@ class IncomingEmailsController < ApplicationController
       
         p "image url is"
         printa img_url
-        printa "sender_id is#{sender_id}"
+        printa "sender_id is #{sender_id}"
         printa couple_id
       
         msg = Message.new(
