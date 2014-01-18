@@ -16,7 +16,7 @@ class IncomingEmailsController < ApplicationController
       printa attachment.tempfile.to_path.to_s
       img = Magick::ImageList.new(attachment.tempfile.to_path.to_s)
       s3 = AWS::S3.new(:access_key_id => ENV['AMAZONS3_KEY_ID'], :secret_access_key => ENV['AMAZONS3_SECRET_ACCESS_KEY'])
-      key = "couples/#{couple_id}/#{attachment.file_name}"
+      key = "couples/#{couple_id}/#{attachment.filename}"
       s3_img = s3.buckets["couplify-development"].objects[key].write(
         img.to_blob, {:acl => :public_read}
       )
