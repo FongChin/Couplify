@@ -15,9 +15,11 @@ class IncomingEmailsController < ApplicationController
           img = Magick::ImageList.new(attachment.tempfile.to_path.to_s)
           s3 = AWS::S3.new(:access_key_id => ENV['AMAZONS3_KEY_ID'], :secret_access_key => ENV['AMAZONS3_SECRET_ACCESS_KEY'])
 
-          filename = attachment.original_filename.split(" ").join("_")
-
-          key = "couples/#{couple_id}/#{filename}_#{Time.now.to_i}"
+          filename_arr = attachment.original_filename.split(".")
+          filename = "#{filename_arr[0].join('_')}_#{Time.now.to_i}.#{filename_arr[1]}"
+          
+          key = "couples/#{couple_id}/#{filename}"
+          
           s3_img = s3.buckets["couplify-development"].objects[key].write(
             img.to_blob, {:acl => :public_read}
           )
@@ -30,7 +32,7 @@ class IncomingEmailsController < ApplicationController
             :image_url => img_url
           )
           if msg.save
-            # 
+            printa msg
           else
             raise msg.errors.full_messages
           end
