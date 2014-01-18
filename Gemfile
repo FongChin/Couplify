@@ -27,8 +27,10 @@ gem 'figaro'
 gem 'backbone-on-rails'
 gem 'oj'
 gem 'ejs'
+gem 'aws-s3'
 gem 'paperclip'
 gem 'aws-sdk'
+
 gem 'mail'
 gem 'rmagick', :require => 'RMagick'
 

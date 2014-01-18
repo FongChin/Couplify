@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140117191728) do
+ActiveRecord::Schema.define(:version => 20140118001925) do
 
   create_table "couples", :force => true do |t|
     t.integer  "u1_id",                                      :null => false
@@ -40,15 +40,12 @@ ActiveRecord::Schema.define(:version => 20140117191728) do
   add_index "invites", ["user_id"], :name => "index_invites_on_user_id", :unique => true
 
   create_table "messages", :force => true do |t|
-    t.integer  "couple_id",                          :null => false
-    t.text     "body",               :default => "", :null => false
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.integer  "user_id",                            :null => false
+    t.integer  "couple_id",                  :null => false
+    t.text     "body",       :default => "", :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.integer  "user_id",                    :null => false
+    t.text     "image_url"
   end
 
   add_index "messages", ["couple_id"], :name => "index_messages_on_couple_id"
