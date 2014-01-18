@@ -29,7 +29,7 @@ class IncomingEmailsController < ApplicationController
         )
         if msg.save
           # render :text => "success"
-          return
+          
         end
       end
       
