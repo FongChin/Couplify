@@ -2,13 +2,8 @@ class IncomingEmailsController < ApplicationController
   
   def create
     printa "action received"
-    printa params["from"]
-    printa params["to"]
-    printa params["text"]
     sender_id = User.get_id_from_email(params["from"])
     couple_id = Couple.get_couple_id(params["to"])
-    printa sender_id
-    printa couple_id
     body = params["text"]
     attachment = params["attachment1"]
     if attachment
@@ -26,11 +21,15 @@ class IncomingEmailsController < ApplicationController
         img.to_blob, {:acl => :public_read}
       )
       img_url = "https://s3-us-west-1.amazonaws.com/couplify-development/#{s3_img.key}"
+      
       p "image url is"
       printa img_url
+      printa sender_id
+      printa couple_id
+      
       msg = Message.create(
         :couple_id => couple_id,
-        :user_id => :sender_id,
+        :user_id => sender_id,
         :body => body,
         :image_url => img_url
       )
