@@ -16,7 +16,7 @@ class IncomingEmailsController < ApplicationController
           s3 = AWS::S3.new(:access_key_id => ENV['AMAZONS3_KEY_ID'], :secret_access_key => ENV['AMAZONS3_SECRET_ACCESS_KEY'])
 
           filename_arr = attachment.original_filename.split(".")
-          filename = "#{filename_arr[0].join('_')}_#{Time.now.to_i}.#{filename_arr[1]}"
+          filename = "#{filename_arr[0].split(' ').join('_')}_#{Time.now.to_i}.#{filename_arr[1]}"
           
           key = "couples/#{couple_id}/#{filename}"
           
