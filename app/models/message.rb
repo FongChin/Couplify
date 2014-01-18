@@ -1,5 +1,5 @@
 class Message < ActiveRecord::Base
-  attr_accessible :body, :couple_id, :image, :user_id
+  attr_accessible :body, :couple_id, :image_url, :user_id
   
   validates :user_id, :couple_id, :presence => true
   

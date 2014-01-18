@@ -23,6 +23,7 @@ class IncomingEmailsController < ApplicationController
           s3_img = s3.buckets["couplify-development"].objects[key].write(
             img.to_blob, {:acl => :public_read}
           )
+          
           img_url = "https://s3-us-west-1.amazonaws.com/couplify-development/#{s3_img.key}"
 
           msg = Message.new(
@@ -47,7 +48,7 @@ class IncomingEmailsController < ApplicationController
       email_error = EmailError.new(:params => params, :error_msg => e.message)
       email_error.save!
     ensure
-      render :text => "saved the error in the database"
+      render :text => "making sure I render something for the sake of sendgrid"
     end
   end
   
