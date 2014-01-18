@@ -20,12 +20,15 @@ class Couple < ActiveRecord::Base
   end
   
   def self.get_couple_id(emails)
+    p "in couple model"
+    p emails
     email_arr = emails.split(", ")
+    p email_arr
     email_arr.each do |email|
       next unless email =~ /@couplify.me$/
       profile_name = email.gsub(/@couplify.me$/, "")
       couple = Couple.find_by_profile_name(profile_name)
-      (couple.nil?)? nil : couple.id
+      return (couple.nil?)? nil : couple.id
     end
   end
   
