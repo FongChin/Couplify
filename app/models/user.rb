@@ -15,8 +15,10 @@ class User < ActiveRecord::Base
   
   has_many :invitations, :class_name => "Invite", :foreign_key => :user_id
   
-  def self.get_id_from_email(email) 
-    User.find_by_email(email).id
+  def self.get_id_from_email(from)
+    email = Mail::Address.new(from).address
+    user = User.find_by_email(email)
+    (user.nil?)? nil : user.id
   end
   
   def couple

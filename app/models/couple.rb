@@ -24,7 +24,8 @@ class Couple < ActiveRecord::Base
     email_arr.each do |email|
       next unless email =~ /@couplify.me$/
       profile_name = email.gsub(/@couplify.me$/, "")
-      return Couple.find_by_profile_name(profile_name).id
+      couple = Couple.find_by_profile_name(profile_name)
+      (couple.nil?)? nil : couple.id
     end
   end
   
