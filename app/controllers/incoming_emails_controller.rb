@@ -30,7 +30,7 @@ class IncomingEmailsController < ApplicationController
             :image_url => img_url
           )
           if msg.save
-            render :text => "success"
+            # 
           else
             raise msg.errors.full_messages
           end
@@ -40,8 +40,11 @@ class IncomingEmailsController < ApplicationController
       end
             
     rescue => e
+      p "error msg"
+      p e.message
       email_error = EmailError.new(:params => params, :error_msg => e.message)
       email_error.save!
+    ensure
       render :text => "saved the error in the database"
     end
   end
