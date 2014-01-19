@@ -34,7 +34,7 @@ class IncomingEmailsController < ApplicationController
             printa msg
             begin
               Pusher["couple_#{couple_id}"].trigger("new_message_event", { 
-                message: msg.to_json 
+                message: msg.to_json.html_safe 
               })
             rescue Pusher::Error => e
               # save it in the database?

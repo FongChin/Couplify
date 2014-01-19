@@ -65,8 +65,12 @@
 
 <script type="text/template" id="message_template">
   <div>
-    <img src="<%%= message.image_url %>" alt="" />
-    <p><%%= message.body %></p>
+    <%% if (message.image_url) { %>
+      <img src="<%%= message.image_url %>" alt="" />
+    <%% } %>
+    <%% if (message.body) { %>
+      <p><%%= message.body %></p>
+    <%% } %>
   </div>
 </script>
 

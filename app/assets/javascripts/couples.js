@@ -14,16 +14,16 @@ var insertMessages = function(){
 var insertNewMessage = function(data){
   var templateCode = $('#message_template').html();
   var templateFn = _.template(templateCode);
-  var renderedContent = templateFn(message);
-
+  var renderedContent = templateFn({message: data});
+  
   $('#messages_div').prepend(renderedContent);
 }
 
 var subscribeToPusherChannel = function(){
-  var pusher = new Pusher('23175');
+  var pusher = new Pusher('a28315172fba222982dd');
   var channel = pusher.subscribe("couple_" + COUPLE_ID);
   channel.bind('new_message_event', function(data) {
-    insertNewMessage(data);
+    insertNewMessage(JSON.parse(data.message));
   });
 }
 
