@@ -14,41 +14,25 @@ class IncomingEmailsController < ApplicationController
       if sender_id && couple_id 
         body = params["text"]
         attachment = params["attachment1"]
-        if attachment
-          img = Magick::Image.read(attachment.tempfile.to_path.to_s).first
-          img.resize_to_fit!(600)
-          s3 = AWS::S3.new(:access_key_id => ENV['AMAZONS3_KEY_ID'], :secret_access_key => ENV['AMAZONS3_SECRET_ACCESS_KEY'])
-
-          filename_arr = attachment.original_filename.split(".")
-          filename = "#{filename_arr[0].split(' ').join('_')}_#{Time.now.to_i}.#{filename_arr[1]}"
-          
-          key = "couples/#{couple_id}/#{filename}"
-          
-          s3_img = s3.buckets["couplify-development"].objects[key].write(
-            img.to_blob, {:acl => :public_read}
-          )
-          
-          img_url = "https://s3-us-west-1.amazonaws.com/couplify-development/#{s3_img.key}"
-
-          post = Post.new(
-            :couple_id => couple_id,
-            :user_id => sender_id,
-            :body => body,
-            :image_url => img_url
-          )
-          if post.save
-            printa post
-            begin
-              Pusher["couple_#{couple_id}"].trigger("new_post_event", { 
-                post: post.to_json.html_safe 
-              })
-            rescue Pusher::Error => e
-              # save it in the database?
-              printa Pusher::Error
-            end
-          else
-            raise post.errors.full_messages
+        img_url = save_attachment(attachment)
+        post = Post.new(
+          :couple_id => couple_id,
+          :user_id => sender_id,
+          :body => body,
+          :image_url => img_url
+        )
+        if post.save
+          printa post
+          begin
+            Pusher["couple_#{couple_id}"].trigger("new_post_event", { 
+              post: post.to_json.html_safe 
+            })
+          rescue Pusher::Error => e
+            # save it in the database?
+            printa Pusher::Error
           end
+        else
+          raise post.errors.full_messages
         end
       else
         raise 'either sender id or couple id is nil'
@@ -68,5 +52,25 @@ class IncomingEmailsController < ApplicationController
     p a
     p "============="
     p "============="
+  end
+  
+  def save_attachment(attachment)
+    if attachment
+      img = Magick::Image.read(attachment.tempfile.to_path.to_s).first
+      img.resize_to_fit!(600)
+      s3 = AWS::S3.new(:access_key_id => ENV['AMAZONS3_KEY_ID'], :secret_access_key => ENV['AMAZONS3_SECRET_ACCESS_KEY'])
+
+      filename_arr = attachment.original_filename.split(".")
+      filename = "#{filename_arr[0].split(' ').join('_')}_#{Time.now.to_i}.#{filename_arr[1]}"
+    
+      key = "couples/#{couple_id}/#{filename}"
+    
+      s3_img = s3.buckets["couplify-development"].objects[key].write(
+        img.to_blob, {:acl => :public_read}
+      )
+    
+      return "https://s3-us-west-1.amazonaws.com/couplify-development/#{s3_img.key}"
+    end
+    nil
   end
 end
