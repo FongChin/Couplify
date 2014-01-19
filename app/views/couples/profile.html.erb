@@ -1,4 +1,5 @@
-<button class="btn btn-primary" data-toggle="modal" data-target="#edit-couple-info">Edit</button>
+<button class="btn btn-primary" id="show-edit-couple-modal" 
+        data-toggle="modal" data-target="#edit-couple-info">Edit</button>
 <div id="messages_div">
   
 </div>
@@ -20,14 +21,14 @@
             <div class="form-group">
               <label for="anniversary-date" class="col-xs-5 col-md-4 control-label">Anniversary</label>
               <div class="col-xs-4 col-md-8">
-                <input type="date" class="form-control" 
+                <input type="date" class="form-control" id="modal-anniversary-date"
                         name="couple[anniversary_date]" value="<%= @couple.anniversary_date %>" />
               </div>
             </div>
             <div class="form-group" id="profile-name-form-div">
               <label for="profile-name" class="col-xs-5 col-md-4 control-label">Profile name/Couplify email</label>
               <div class="col-xs-3 col-md-8">
-                <input type="text" class="form-control" id="couple_profile_name"
+                <input type="text" class="form-control" id="modal-profile-name"
                         name="couple[profile_name]" value="<%= @couple.profile_name %>" />
               </div>
             </div>
@@ -57,20 +58,34 @@
 <script type="text/template" id="messages_template">
   <%% _(messages).each(function(message){ %>
     <div>
+      <%% if (u1Id == message.user_id) { %>
+        <p><%%= u1Name %></p>
+      <%% }else if (u2Id == message.user_id){ %>
+        <p><%%= u2Name %></p>
+      <%% } %>
       <img src="<%%= message.image_url %>" alt="" />
       <p><%%= message.body %></p>
+      <p class="delete_msg" data-id="<%%= message.id %>">delete</p>
+      <hr />
     </div>
+
   <%% }); %>
 </script>
 
 <script type="text/template" id="message_template">
   <div>
+    <%% if (u1Id == message.user_id) { %>
+      <p><%%= u1Name %></p>
+    <%% }else if (u2Id == message.user_id){ %>
+      <p><%%= u2Name %></p>
+    <%% } %>
     <%% if (message.image_url) { %>
       <img src="<%%= message.image_url %>" alt="" />
     <%% } %>
     <%% if (message.body) { %>
       <p><%%= message.body %></p>
     <%% } %>
+    <p class="delete_msg" data-id="<%%= message.id %>">delete</p>
   </div>
 </script>
 
@@ -86,6 +101,10 @@
 
 <script type="text/javascript">
   var COUPLE_ID = <%= @couple.id %>;
-
-  
+  var u1Id = <%= @couple.u1_id %>;
+  var u2Id = <%= @couple.u2_id %>;
+  var u1Name = "<%= @u1.first_name %>";
+  var u2Name = "<%= @u2.first_name %>";
+  var coupleName = "<%= @couple.profile_name %>";
+  var coupleAnniversaryDate = "<%= @couple.anniversary_date %>";
 </script>

@@ -34,6 +34,25 @@ $('document').ready(function(){
   
   subscribeToPusherChannel();
   
+  $('#show-edit-couple-modal').on('click', function(event){
+    $('#modal-anniversary-date').val(coupleAnniversaryDate);
+    $('#modal-profile-name').val(coupleName);
+    $('#edit-couple-info').modal('show');
+  })
+  
+  $('#messages_div').on("click", '.delete_msg', function(event){
+    var $msgDiv = $(event.target).parent();
+    var msgId = $(event.target).data('id');
+    $.ajax({
+      type: 'DELETE',
+      url: '/messages/' + msgId,
+      success: function(){
+        console.log("message deleted");
+        $msgDiv.remove();
+      }
+    })
+  })
+  
   $('#edit-couple-form').on('submit', function(event){
     event.preventDefault();
     var attribute = $('#edit-couple-form').serializeJSON();
@@ -41,16 +60,20 @@ $('document').ready(function(){
     $('#profile-name-form-div').removeClass('has-error');
     
     $.ajax({
-      type: "PUT",
+      type: 'PUT',
       url: $('#edit-couple-form').attr('action'),
       data: attribute,
       success: function(data, textStatus, jqXHR){
         // change data
-        $('#anniversary-date').text(data.anniversary_date)
+        $('#anniversary-date').text(data.anniversary_date);
+        $('#modal-anniversary-date').val(data.anniversary_date);
+        $('#modal-profile-name').val(data.profile_name);
+        
         $('#edit-couple-info').modal('hide');
         if (data.profile_name && attribute.old_profile_name !== data.profile_name){
-          window.location = window.location.origin + "/couples/" + data.profile_name;
+          window.location = window.location.origin + '/couples/' + data.profile_name;
         }
+        
       },
       error: function(jqXHR){
         var profile_name_errors = jqXHR.responseJSON.errors.profile_name

@@ -1,7 +1,7 @@
 class Couple < ActiveRecord::Base
   attr_accessible :anniversary_date, :profile_name, :u1_id, :u2_id
   
-  validates :profile_name, :uniqueness => true, :presence => { :message => " is taken."}
+  validates :profile_name, :uniqueness => true, :presence => true
   validates :u1_id, :u2_id, :presence => true
   
   belongs_to :u1, :class_name => "User", :primary_key => :id, :foreign_key => :u1_id

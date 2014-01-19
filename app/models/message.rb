@@ -4,6 +4,6 @@ class Message < ActiveRecord::Base
   validates :user_id, :couple_id, :presence => true
   
   belongs_to :couple
-  belongs_to :owner
+  belongs_to :owner, :class_name => "User"
   
 end

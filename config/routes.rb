@@ -13,5 +13,6 @@ Couplify::Application.routes.draw do
   end
   
   resource :incoming_email, :only => [:create]
+  resources :messages, :only => [:destroy]
   root :to => "couples#index"
 end

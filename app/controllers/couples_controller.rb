@@ -1,9 +1,12 @@
 class CouplesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :current_user_owns_profile!
   
   def profile
     @couple = Couple.find_by_profile_name(params[:profile_name])
-    @messages = @couple.messages.order('created_at DESC')
+    @messages = @couple.messages.includes(:owner).order('created_at DESC')
+    @u1 = User.find(@couple.u1_id)
+    @u2 = User.find(@couple.u2_id)
     render 'profile'
   end
   
