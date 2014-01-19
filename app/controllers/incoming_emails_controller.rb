@@ -6,7 +6,12 @@ class IncomingEmailsController < ApplicationController
     begin
       sender_id = User.get_id_from_email(params["from"])
       couple_id = Couple.get_couple_id(params["to"])
-      if sender_id && couple_id
+      couple = Couple.find(couple_id)
+      
+      is_sender_owner = couple.is_sender_owner?(sender_id)
+      raise "sender is not one of the owners" unless is_sender_owner
+      
+      if sender_id && couple_id 
         body = params["text"]
         attachment = params["attachment1"]
         if attachment
@@ -25,24 +30,24 @@ class IncomingEmailsController < ApplicationController
           
           img_url = "https://s3-us-west-1.amazonaws.com/couplify-development/#{s3_img.key}"
 
-          msg = Message.new(
+          post = Post.new(
             :couple_id => couple_id,
             :user_id => sender_id,
             :body => body,
             :image_url => img_url
           )
-          if msg.save
-            printa msg
+          if post.save
+            printa post
             begin
-              Pusher["couple_#{couple_id}"].trigger("new_message_event", { 
-                message: msg.to_json.html_safe 
+              Pusher["couple_#{couple_id}"].trigger("new_post_event", { 
+                post: post.to_json.html_safe 
               })
             rescue Pusher::Error => e
               # save it in the database?
               printa Pusher::Error
             end
           else
-            raise msg.errors.full_messages
+            raise post.errors.full_messages
           end
         end
       else
@@ -50,7 +55,7 @@ class IncomingEmailsController < ApplicationController
       end
             
     rescue => e
-      p "error msg"
+      p "error post"
       p e.message
       email_error = EmailError.new(:params => params, :error_msg => e.message)
       email_error.save!

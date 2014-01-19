@@ -3,28 +3,32 @@
 // You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 var insertMessages = function(){
-  var messages = JSON.parse($('#bootstraped_messagees_json').html());
-  var templateCode = $('#messages_template').html();
-  var templateFn = _.template(templateCode);
-  var renderedContent = templateFn(messages);
+  var posts = JSON.parse($('#bootstraped_posts_json').html());
+  var postsTemplateCode = $('#posts_template').html();
+  var postsTemplateFn = _.template(postsTemplateCode);
   
-  $('#messages_div').html(renderedContent);
+  var postTemplateCode = $('#post_template').html();
+  var postTemplateFn = _.template(postTemplateCode);
+  
+  var renderedContent = postsTemplateFn({posts: posts.posts, renderSubPost: postTemplateFn});
+  
+  $('#posts_div').html(renderedContent);
 }
 
 var insertNewMessage = function(data){
-  var templateCode = $('#message_template').html();
+  var templateCode = $('#post_template').html();
   var templateFn = _.template(templateCode);
-  var renderedContent = templateFn({message: data});
+  var renderedContent = templateFn({post: data});
   
-  $('#messages_div').prepend(renderedContent);
+  $('#posts_div').prepend(renderedContent);
 }
 
 var subscribeToPusherChannel = function(){
   var pusher = new Pusher('b9960496cbe51f37c4fb');
   var channel = pusher.subscribe("couple_" + COUPLE_ID);
   
-  channel.bind('new_message_event', function(data) {
-    insertNewMessage(JSON.parse(data.message));
+  channel.bind('new_post_event', function(data) {
+    insertNewMessage(JSON.parse(data.post));
   });
 }
 
@@ -40,14 +44,14 @@ $('document').ready(function(){
     $('#edit-couple-info').modal('show');
   })
   
-  $('#messages_div').on("click", '.delete_msg', function(event){
+  $('#posts_div').on("click", '.delete_post', function(event){
     var $msgDiv = $(event.target).parent();
     var msgId = $(event.target).data('id');
     $.ajax({
       type: 'DELETE',
       url: '/messages/' + msgId,
       success: function(){
-        console.log("message deleted");
+        console.log("post deleted");
         $msgDiv.remove();
       }
     })

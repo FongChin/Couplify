@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140118214433) do
+ActiveRecord::Schema.define(:version => 20140119185912) do
 
   create_table "couples", :force => true do |t|
     t.integer  "u1_id",                                      :null => false
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20140118214433) do
   add_index "invites", ["user_id", "p_email"], :name => "index_invites_on_user_id_and_p_email", :unique => true
   add_index "invites", ["user_id"], :name => "index_invites_on_user_id", :unique => true
 
-  create_table "messages", :force => true do |t|
+  create_table "posts", :force => true do |t|
     t.integer  "couple_id",                  :null => false
     t.text     "body",       :default => "", :null => false
     t.datetime "created_at",                 :null => false
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(:version => 20140118214433) do
     t.text     "image_url"
   end
 
-  add_index "messages", ["couple_id"], :name => "index_messages_on_couple_id"
+  add_index "posts", ["couple_id"], :name => "index_messages_on_couple_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                      :default => "", :null => false
