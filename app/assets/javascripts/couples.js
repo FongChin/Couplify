@@ -20,8 +20,9 @@ var insertNewMessage = function(data){
 }
 
 var subscribeToPusherChannel = function(){
-  var pusher = new Pusher('a28315172fba222982dd');
+  var pusher = new Pusher('b9960496cbe51f37c4fb');
   var channel = pusher.subscribe("couple_" + COUPLE_ID);
+  
   channel.bind('new_message_event', function(data) {
     insertNewMessage(JSON.parse(data.message));
   });

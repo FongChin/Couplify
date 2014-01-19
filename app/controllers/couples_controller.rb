@@ -3,7 +3,7 @@ class CouplesController < ApplicationController
   
   def profile
     @couple = Couple.find_by_profile_name(params[:profile_name])
-    @messages = @couple.messages.order('created_at')
+    @messages = @couple.messages.order('created_at DESC')
     render 'profile'
   end
   
