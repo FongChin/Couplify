@@ -1,13 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  
-  def pusher_client
-    @pusher ||= Pusher::Client.new({
-      app_id: ENV['PUSHER_APP_ID'],
-      key: ENV['PUSHER_KEY'],
-      secret: ENV['PUSHER_SECRET']
-    })
-  end
+
   
   def after_sign_in_path_for(resource)
     @invites = current_user.invitations
