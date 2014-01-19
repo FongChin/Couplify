@@ -1,6 +1,6 @@
 # Load the rails application
 require File.expand_path('../application', __FILE__)
-
+require 'pusher'
 # Initialize the rails application
 Couplify::Application.initialize!
 
@@ -14,7 +14,7 @@ if Rails.env.production?
     :password       => ENV['SENDGRID_PASSWORD'],
     :domain         => 'heroku.com'
   }
-  ActionMailer::Base.delivery_method ||= :smtp
+  ActionMailer::Base.delivery_method ||= :smtp  
 elsif Rails.env.development?
   # Remember the letter_opener gem? It won't send real emails; it
   # just opens them in another tab.

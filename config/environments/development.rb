@@ -1,9 +1,3 @@
-require 'pusher'
-
-Pusher.app_id = ENV['PUSHER_APP_ID']
-Pusher.key = ENV['PUSHER_KEY']
-Pusher.secret = ENV['PUSHER_SECRET']
-
 Couplify::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -56,4 +50,10 @@ Couplify::Application.configure do
       :s3_host_name => 's3-us-west-1.amazonaws.com'
     }
   }
+  
+  require 'pusher'
+
+  Pusher.app_id = ENV['PUSHER_APP_ID']
+  Pusher.key = ENV['PUSHER_KEY']
+  Pusher.secret = ENV['PUSHER_SECRET']
 end
