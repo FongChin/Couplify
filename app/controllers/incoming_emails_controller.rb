@@ -15,6 +15,9 @@ class IncomingEmailsController < ApplicationController
         body = params["text"]
         attachment = params["attachment1"]
         img_url = save_attachment(attachment, couple_id)
+        
+        printa img_url
+        
         post = Post.new(
           :couple_id => couple_id,
           :user_id => sender_id,
@@ -37,7 +40,6 @@ class IncomingEmailsController < ApplicationController
       else
         raise 'either sender id or couple id is nil'
       end
-            
     rescue => e
       p "error post"
       p e.message
