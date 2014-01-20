@@ -40,6 +40,8 @@ $('document').ready(function(){
   $('#show-edit-couple-modal').on('click', function(event){
     $('#modal-anniversary-date').val(coupleAnniversaryDate);
     $('#modal-profile-name').val(coupleName);
+    $('#profile-name-error-div').addClass('hidden');
+    $('#profile-name-form-div').removeClass('has-error');
     $('#edit-couple-info').modal('show');
   })
   

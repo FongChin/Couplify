@@ -14,7 +14,7 @@ class IncomingEmailsController < ApplicationController
       if sender_id && couple_id 
         body = params["text"]
         attachment = params["attachment1"]
-        img_url = save_attachment(attachment)
+        img_url = save_attachment(attachment, couple_id)
         post = Post.new(
           :couple_id => couple_id,
           :user_id => sender_id,
@@ -54,7 +54,7 @@ class IncomingEmailsController < ApplicationController
     p "============="
   end
   
-  def save_attachment(attachment)
+  def save_attachment(attachment, couple_id)
     if attachment
       img = Magick::Image.read(attachment.tempfile.to_path.to_s).first
       img.resize_to_fit!(600)
