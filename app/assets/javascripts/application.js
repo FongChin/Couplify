@@ -15,4 +15,8 @@
 //= require jquery.serializeJSON
 //= require bootstrap
 //= require underscore
+//= require masonry
+//= require modernizrTransitions
+//= require imagesloaded
+//= require jquery.infinitescroll
 //= require_tree .

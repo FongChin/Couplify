@@ -10,8 +10,8 @@ class User < ActiveRecord::Base
 
   has_attached_file :profile_image, :styles => { 
     :medium => "300x300>", 
-    :thumb => "100x100>" 
-  }, :default_url => "/images/:style/missing.jpeg"
+    :thumb => "30x30#" 
+  }, :default_url => "/assets/:style/missing.jpeg"
   
   has_many :invitations, :class_name => "Invite", :foreign_key => :user_id
   
@@ -33,5 +33,11 @@ class User < ActiveRecord::Base
     elsif self.id == couple.u2_id
       User.find(couple.u1_id)
     end
+  end
+  
+  def basic_info_in_json
+    self.attributes.select do |key, value|
+      ["id", "email", "first_name", "last_name"].include?(key)
+    end.to_json.html_safe
   end
 end

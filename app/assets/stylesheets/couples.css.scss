@@ -1,3 +1,44 @@
 // Place all the styles related to the couples controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.post { 
+  width: 230px;
+  margin: 5px;
+  float: left;
+  border-radius: 3px 3px 0 0;
+  font-size: 12px;
+  background-color: #fff;
+  font-family: 'Helvetica Neue', Helvetica, arial, sans-serif;
+}
+
+.post img{
+  border-radius: 0 0 3px 3px;
+  width: 100%;
+}
+
+.post .author-info, .post .post-body{
+  margin: 5px;
+}
+
+.post .author-img{
+  width: 30px;
+  height: 30px;
+}
+
+.post .author-info img{
+  border-radius: 3px;
+  float: left;
+  margin-right: 3px;
+}
+.post .author-name{
+  display: block;
+}
+
+.post .post-time{
+  color: #777777;
+}
+
+.post .divider{
+  border-top: 1px solid #e7e7e7;
+}

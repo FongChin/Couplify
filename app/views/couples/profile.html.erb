@@ -1,6 +1,14 @@
 <button class="btn btn-primary" id="show-edit-couple-modal" 
         data-toggle="modal" data-target="#edit-couple-info">Edit</button>
-<div id="posts_div">
+
+<div class="row">
+  <% @couple.attributes.each do |attr_name, value| %>
+    <p><%= attr_name %>: <%= value %></p>
+  <% end %>  
+</div>
+<p>Anniversary: <span id="anniversary-date"><%= @couple.anniversary_date %></span></p>
+
+<div id="posts-div">
   
 </div>
 
@@ -55,42 +63,48 @@
   </div>
 </div>
 
-<script type="text/template" id="posts_template">
+<script type="text/template" id="posts-template">
   <%% _(posts).each(function(post){ %>
     <%%= renderSubPost({post: post}) %>
   <%% }); %>
 </script>
 
-<script type="text/template" id="post_template">
-  <div>
-    <%% if (u1Id == post.user_id) { %>
-      <p><%%= u1Name %></p>
-    <%% }else if (u2Id == post.user_id){ %>
-      <p><%%= u2Name %></p>
-    <%% } %>
+<script type="text/template" id="post-template">
+  <div class="post">
+    <button class="delete-post close text-right" data-id="<%%= post.id %>" style="margin-right: 5px;">&times;</button>
+    <div class="author-info">
+      <%% if (u1.id == post.user_id) { %>
+        <img src="<%= @u1.profile_image.url(:thumb) %>" alt="<%= @u1.first_name %>" class="author-img" />
+        <span class="text-left author-name"><%%= u1.first_name %></span>
+      <%% }else if (u2.id == post.user_id){ %>
+        <img src="<%= @u1.profile_image.url(:thumb) %>" alt="<%= @u2.first_name %>" class="author-img" />
+        <span class="text-left author-name"><%%= u2.first_name %></span>
+      <%% } %>
+      <span class="post-time"><%%= (new Date(post.created_at)).toLocaleTimeString("en-us", date_options) %></span>
+    </div>
+    <p class="divider"></p>
+    <div class="post-body">
+      <p><%%= post.body %></p>
+    </div>
     <img src="<%%= post.image_url %>" alt="" />
-    <p><%%= post.body %></p>
-    <p class="delete_post" data-id="<%%= post.id %>">delete</p>
-    <hr />
   </div>
 </script>
 
-<script type="text/json" id="bootstraped_posts_json">
+<script type="text/json" id="bootstraped-posts-json">
   { "posts": <%= @posts.to_json.html_safe %> }
 </script>
 
-<% @couple.attributes.each do |attr_name, value| %>
-  <p><%= attr_name %>: <%= value %></p>
-<% end %>
-
-<p>Anniversary: <span id="anniversary-date"><%= @couple.anniversary_date %></span></p>
 
 <script type="text/javascript">
   var COUPLE_ID = <%= @couple.id %>;
-  var u1Id = <%= @couple.u1_id %>;
-  var u2Id = <%= @couple.u2_id %>;
-  var u1Name = "<%= @u1.first_name %>";
-  var u2Name = "<%= @u2.first_name %>";
+  var u1 = <%= @u1.basic_info_in_json %>;
+  var u2 = <%= @u2.basic_info_in_json %>;
   var coupleName = "<%= @couple.profile_name %>";
   var coupleAnniversaryDate = "<%= @couple.anniversary_date %>";
+  var date_options = {
+    weekday: "long", year: "numeric", month: "short",
+    day: "numeric", hour: "2-digit", minute: "2-digit"
+  }
+  var $posts_container = $('#posts-div');
+  
 </script>

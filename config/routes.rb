@@ -1,4 +1,6 @@
 Couplify::Application.routes.draw do
+  get "static_pages/home"
+
   devise_for :users
 
   resources :invites, :only => [:create, :new, :update, :destroy] do
@@ -6,13 +8,13 @@ Couplify::Application.routes.draw do
     get "make_decision", :on => :collection
   end
   
-  resources :couples, :only => [:create, :update, :index] do
+  resources :couples, :only => [:create, :update] do
     collection do
       get ":profile_name", :to => "couples#profile", :as => :profile
     end
   end
   
   resource :incoming_email, :only => [:create]
-  resources :messages, :only => [:destroy]
-  root :to => "couples#index"
+  resources :posts, :only => [:destroy]
+  root :to => "static_pages#home"
 end
