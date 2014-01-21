@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_attached_file :profile_image, :styles => { 
     :medium => "300x300>", 
     :thumb => "30x30#" 
-  }, :default_url => "/assets/:style/missing.jpeg"
+  }, :default_url => "/assets/:style/missing.jpg"
   
   has_many :invitations, :class_name => "Invite", :foreign_key => :user_id
   
