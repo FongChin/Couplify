@@ -1,0 +1,29 @@
+<div class="col-xs-6 col-md-4">
+<h2>Edit Couplify Profile</h2>
+<form action="<%= couple_url(@couple) %>" role="form" id="edit-couple-form" method="POST">
+  <input type="hidden" name="_method" value="PUT"/> <!-- _method = put? -->
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+  <input type="hidden" id="old_profile_name" name="old_profile_name" value="<%= @couple.profile_name %>" />
+  <div class="form-group">
+    <label for="anniversary-date" class="control-label">Anniversary</label>    
+    <input type="date" class="form-control" id="modal-anniversary-date"
+            name="couple[anniversary_date]" value="<%= @couple.anniversary_date %>" />
+    
+  </div>
+  <div class="form-group" id="profile-name-form-div">
+    <label for="profile-name" class="control-label">Profile name/Couplify email</label>
+    <input type="text" class="form-control" id="modal-profile-name"
+              name="couple[profile_name]" value="<%= @couple.profile_name %>" />
+  </div>
+  <% if  @errors %>
+    <div class="form-group" id="profile-name-error-div">
+      <% @errors.each do |error| %>
+        <p><%= error %></p>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary" id="submit-couple-edit">Save Changes</button>
+  </div>
+</form>
+</div>

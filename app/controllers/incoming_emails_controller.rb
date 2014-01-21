@@ -7,7 +7,7 @@ class IncomingEmailsController < ApplicationController
       sender_id = User.get_id_from_email(params["from"])
       couple_id = Couple.get_couple_id(params["to"])
       couple = Couple.find(couple_id)
-      
+      printa couple_id
       is_sender_owner = couple.is_sender_owner?(sender_id)
       raise "sender is not one of the owners" unless is_sender_owner
       

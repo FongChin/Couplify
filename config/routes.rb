@@ -11,6 +11,7 @@ Couplify::Application.routes.draw do
   resources :couples, :only => [:create, :update] do
     collection do
       get ":profile_name", :to => "couples#profile", :as => :profile
+      get ":profile_name/edit", :to => "couples#edit", :as => :edit_profile
     end
   end
   

@@ -16,8 +16,12 @@ class CouplesController < ApplicationController
     if @couple.update_attributes(params[:couple])
       render :json => @couple
     else
-      render :json => {:errors => @couple.errors }, :status => :unprocessable_entity
+      @errors = @couple.errors.full_messages
+      render 'edit'
     end
   end
   
+  def edit
+    @couple = Couple.find_by_profile_name(params[:profile_name])
+  end
 end

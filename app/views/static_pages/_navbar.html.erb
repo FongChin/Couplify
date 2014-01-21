@@ -1,0 +1,36 @@
+<% if current_user %>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a href="/" class="navbar-brand">Couplify</a>
+  </div>
+  <div class="collapse navbar-collapse" id="navbar">
+    <ul class="nav navbar-nav navbar-right" style="margin-right: 25px;">
+      <% if current_user.couple %>
+        <li>
+          <a href="/couples/<%= current_user.couple.profile_name %>/edit" id="" >Edit Couplify Profile</a>
+        </li>
+      <% end %>
+      <li>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <span><%= current_user.first_name %> <%= current_user.last_name %></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li>            
+            <a href="/users/edit"><span style="margin-right: 5px;"><%= image_tag current_user.profile_image.url(:thumb) %></span> Edit Info</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <%= link_to("Sign Out", destroy_user_session_url, 
+          {:method => :delete })%>
+      </li>
+    </ul>
+  </div>
+</nav>
+<% end %>

@@ -4,23 +4,31 @@
 
 #welcome {
   height: 600px;
-  background: #292929 url('/assets/home/main_background.jpg') 50% 0 repeat fixed;
-  background-position: 0% 0px;
-  background-repeat: no-repeat;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+}
+
+#container-1-bg{
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 
 .centralized {
   text-align: center;
-  margin: 200px auto;
+  margin-top: 10%;
 }
 
-.logo{
+h1 {
   font-family: 'Open Sans', sans-serif;
   color: #fff;
   line-height: 70px;
   font-size: 80px;
+}
+
+@media screen and (max-width: 568px) {
+  h1 {
+    font-size: 50px;
+  }
 }

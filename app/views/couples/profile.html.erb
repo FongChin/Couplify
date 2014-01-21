@@ -1,15 +1,23 @@
-<button class="btn btn-primary" id="show-edit-couple-modal" 
-        data-toggle="modal" data-target="#edit-couple-info">Edit</button>
+<%= render 'navbar' %>
 
-<div class="row">
-  <% @couple.attributes.each do |attr_name, value| %>
-    <p><%= attr_name %>: <%= value %></p>
-  <% end %>  
+<div class="jumbotron">
+  <div class="container">
+    <h1><%= @u1.first_name %> and <%= @u2.first_name %></h1>
+  </div>
+  <div class="row">
+    <% @couple.attributes.each do |attr_name, value| %>
+      <p><%= attr_name %>: <%= value %></p>
+    <% end %>
+    <p>Anniversary: <span id="anniversary-date"><%= @couple.anniversary_date %></span></p>
+    <!-- <button class="btn btn-primary" id="show-edit-couple-modal" 
+       data-toggle="modal" data-target="#edit-couple-info">Edit Couplify Profile</button> -->
+  </div>
 </div>
-<p>Anniversary: <span id="anniversary-date"><%= @couple.anniversary_date %></span></p>
+<div class="main-container">
 
-<div id="posts-div">
-  
+  <div class="row">    
+    <div id="posts-div"></div>
+  </div>
 </div>
 
 
