@@ -81,7 +81,12 @@
   border-top: 1px solid #e7e7e7;
 }
 
-.main-container{
-  width: 90%;
+#posts-div{
+  width: auto;
   margin: auto;
+}
+
+#export-btn{
+  position: relative;
+  top: -90px;
 }
