@@ -35,6 +35,7 @@ gem 'mail'
 gem 'rmagick', :require => 'RMagick'
 gem 'kaminari'
 gem 'pusher'
+gem 'pdfkit'
 
 group :development do
   gem 'letter_opener'

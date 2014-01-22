@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.box{
+  width: 360px;
+  display: inline;
+  float: left;
+  margin-right: 20px;
+}
+
 #cover-photo{
   height: 500px;
   width: 100%;
@@ -12,12 +19,13 @@
 }
 
 #profile-cover{
+  min-width: 1080px;
   height: 400px;
   color: white;
-  display: block;
   position: relative;
   overflow: hidden;
   padding: 20px;
+  text-align: center;
 }
 
 .user-profile-img{

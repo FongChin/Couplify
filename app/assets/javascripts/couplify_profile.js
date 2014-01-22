@@ -34,9 +34,9 @@ var subscribeToPusherChannel = function(){
   });
 }
 
-var InfiniteScroll = function(numLoads, coupleId){
+var InfiniteScroll = function(numLoads){
   this.numLoads = numLoads;
-  this.coupleId = coupleId;
+  this.coupleId = COUPLE_ID;
   this.itemsPerPage = 20;
   this.totalPages = Math.ceil(NUM_POSTS / this.itemsPerPage );
 }
@@ -63,7 +63,7 @@ InfiniteScroll.prototype.render = function(data){
 }
 
 $('document').ready(function(){
-  var infiniteScroll = new InfiniteScroll(1, COUPLE_ID);
+  var infiniteScroll = new InfiniteScroll(1);
   insertPosts();
   subscribeToPusherChannel();
   

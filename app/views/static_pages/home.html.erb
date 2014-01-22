@@ -1,3 +1,11 @@
+<style type="text/css">
+  body {
+    height: 100%;
+    background-image: url("/assets/home/main_background.jpg");
+    background-size: cover;
+  }
+</style>
+
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -8,13 +16,12 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 
 <div class="row" id="home">
-  <!-- <img src="/assets/home/main_background_copy.jpg" alt="welcome" id="container-1-bg"/> -->
   <div class="centralized">
     <div id="logo-box" class="text-center">
       <h1 class="logo">Couplify</h1>
     </div>
     <div style="margin-bottom: 30px;">
-      <button class="btn btn-primary" >Sign Up</button>
+      <a class="btn btn-primary" id="sign-up" href="/users/sign_up">Sign Up</a>
     </div>
     <div class="social well">
       <div class="fb-like" data-href="http://couplify.me" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>

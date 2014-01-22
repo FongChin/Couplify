@@ -61,5 +61,7 @@ module Couplify
     
     # forces the app to not access the DB or load models when precompiling assets
     config.assets.initialize_on_precompile = false
+    
+    config.middleware.use PDFKit::Middleware
   end
 end

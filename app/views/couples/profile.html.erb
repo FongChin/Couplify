@@ -1,11 +1,11 @@
-<div class="row text-center" id="profile-cover">
+<div id="profile-cover">
   <img src="/assets/cover-photo.jpg" alt="" id="cover-photo"/>
-  <div class="col-md-4" style="padding-top: 20px;">
+  <div class="box" style="padding-top: 20px;">
     <%= image_tag @u1.profile_image.url(:medium), :class => "user-profile-img" %>
     <img src="/assets/heart-shadow.jpg" alt="" id=""/>
     <h2><%= @u1.first_name.capitalize %></h2>
   </div>
-  <div class="col-md-4">
+  <div class="box">
     <img src="/assets/red-heart-icon.png" alt="" id="heart-profile-info"/>
     <div id="profile-info">
       <p>Email: <br /><span id="profile-name"><%= @couple.profile_name %>@couplify.me</span></p>
@@ -13,7 +13,7 @@
     </div>
     <button class="btn btn-primary" id="export-btn">Export Profile as PDF</button>
   </div>
-  <div class="col-md-4" style="padding-top: 20px;">
+  <div class="box" style="padding-top: 20px;">
     <%= image_tag @u2.profile_image.url(:medium), :class => "user-profile-img" %>
     <img src="/assets/heart-shadow.jpg" alt="" id=""/>
     <h2><%= @u2.first_name.capitalize %></h2>
@@ -66,4 +66,3 @@
   }
   var $posts_container = $('#posts-div');
 </script>
-<script type="text/javascript" src="/assets/couplify_profile.js"></script>

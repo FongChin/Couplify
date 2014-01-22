@@ -114,6 +114,7 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    pdfkit (0.5.4)
     pg (0.17.0)
     polyglot (0.3.3)
     pry (0.9.12.4)
@@ -205,6 +206,7 @@ DEPENDENCIES
   mail
   oj
   paperclip
+  pdfkit
   pg
   pry-rails
   pusher
