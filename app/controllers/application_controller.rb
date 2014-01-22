@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   def current_user_owns_profile!
-    couple = Couple.find_by_profile_name(params[:profile_name])
+    couple = Couple.find_by_profile_name(params[:profile_name]) || Couple.find(params[:id])
     unless current_user.id == couple.u1_id || current_user.id == couple.u2_id
       render :text => "You don't have access to this profile"
     end

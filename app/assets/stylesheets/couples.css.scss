@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .box{
-  width: 360px;
+  width: 290px;
   display: inline;
   float: left;
   margin-right: 20px;
@@ -19,14 +19,16 @@
 }
 
 #profile-cover{
-  min-width: 1080px;
+  min-width: 980px;
   height: 400px;
   color: white;
   position: relative;
   overflow: hidden;
-  padding: 20px;
+  padding-top: 20px;
   text-align: center;
+  padding-left: 12%;
 }
+
 
 .user-profile-img{
   width: 240px;
@@ -90,7 +92,7 @@
 }
 
 #posts-div{
-  width: auto;
+  max-width: 990px;
   margin: auto;
 }
 

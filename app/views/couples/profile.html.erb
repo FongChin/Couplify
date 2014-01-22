@@ -33,14 +33,14 @@
   <div class="post">
     <button class="delete-post close text-right" data-id="<%%= post.id %>" style="margin-right: 5px;">&times;</button>
     <div class="author-info">
-      <%% if (u1.id == post.user_id) { %>
+      <%% if (Couplify.u1.id == post.user_id) { %>
         <img src="<%= @u1.profile_image.url(:thumb) %>" alt="<%= @u1.first_name %>" class="author-img" />
-        <span class="text-left author-name"><%%= u1.first_name %></span>
-      <%% }else if (u2.id == post.user_id){ %>
+        <span class="text-left author-name"><%%= Couplify.u1.first_name %></span>
+      <%% }else if (Couplify.u2.id == post.user_id){ %>
         <img src="<%= @u1.profile_image.url(:thumb) %>" alt="<%= @u2.first_name %>" class="author-img" />
-        <span class="text-left author-name"><%%= u2.first_name %></span>
+        <span class="text-left author-name"><%%= Couplify.u2.first_name %></span>
       <%% } %>
-      <span class="post-time"><%%= (new Date(post.created_at)).toLocaleTimeString("en-us", date_options) %></span>
+      <span class="post-time"><%%= (new Date(post.created_at)).toLocaleTimeString("en-us", Couplify.date_options) %></span>
     </div>
     <p class="divider"></p>
     <div class="post-body">
@@ -56,13 +56,13 @@
 
 
 <script type="text/javascript">
-  var COUPLE_ID = <%= @couple.id %>;
-  var u1 = <%= @u1.basic_info_in_json %>;
-  var u2 = <%= @u2.basic_info_in_json %>;
-  var NUM_POSTS = <%= @num_posts %>;
-  var date_options = {
+  Couplify.COUPLE_ID = <%= @couple.id %>;
+  Couplify.u1 = <%= @u1.basic_info_in_json %>;
+  Couplify.u2 = <%= @u2.basic_info_in_json %>;
+  Couplify.NUM_POSTS = <%= @num_posts %>;
+  Couplify.date_options = {
     weekday: "long", year: "numeric", month: "short",
     day: "numeric", hour: "2-digit", minute: "2-digit"
   }
-  var $posts_container = $('#posts-div');
+  Couplify.$posts_container = $('#posts-div');
 </script>

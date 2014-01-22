@@ -58,6 +58,12 @@ class IncomingEmailsController < ApplicationController
   
   def save_attachment(attachment, couple_id)
     if attachment
+      
+      printa attachment.tempfile.read
+      printa attachment.tempfile.to_path.to_s
+      
+      
+      
       img = Magick::Image.read(attachment.tempfile.to_path.to_s).first
       img.resize_to_fit!(600)
       s3 = AWS::S3.new(:access_key_id => ENV['AMAZONS3_KEY_ID'], :secret_access_key => ENV['AMAZONS3_SECRET_ACCESS_KEY'])

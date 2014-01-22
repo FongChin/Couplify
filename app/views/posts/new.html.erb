@@ -1,0 +1,118 @@
+<div class="row">
+  <br />
+  <div id="upload-photo-div" >
+    <form action="/couples/<%= @couple.id %>/posts" method="POST" 
+          enctype="multipart/form-data"
+          class="dropzone" id="dropzone-form" >
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+      <div class="dz-default dz-message">
+        <h2 class="text-center">Drag and Drop files to upload picture</h2>
+      </div>
+      <div>
+        <button class="btn btn-primary" type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script type="text/template" id="preview-template">
+  <div class="preview-post dz-preview">
+     <span class="delete-preview">x</span>
+     <div class="preview-post-body">
+        <textarea rows="3" class="form-control" name="post[body]" placeholder="your message" /></textarea>
+     </div>
+     <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+     <div class="dz-error-message"><span data-dz-errormessage></span></div>
+     <input type="hidden" class="preview-post-thumbnail-data" name="post[data_url]" />
+     <img data-dz-thumbnail alt="" class="">
+     <div class="dz-filename text-center"><span data-dz-name></span></div>
+     <div class="dz-size text-center" data-dz-size></div>
+  </div>
+</script>
+
+<script type="text/javascript">
+  (function(root){
+    Couplify = root.Couplify = root.Couplify || {};
+    var previewTemplate = $('#preview-template').html();
+    
+    var fileAddedCallback = function (file, url){
+      window.file = file;
+      console.log(file);
+      console.log(url);
+      $(file.previewTemplate).find('.preview-post-thumbnail-data').val(url);
+    }
+    
+    root.Dropzone.options.dropzoneForm = {
+      previewTemplate: previewTemplate,
+      maxFiles: 1,
+      init: function(){
+        this.on("thumbnail", fileAddedCallback);
+      }
+    }
+  })(this);
+  
+  $('#upload-photo-div').on('click', '.delete-preview', function(event){
+    $(event.target).parent().remove();
+  });
+  
+</script>
+
+<style type="text/css">
+  .dz-default{
+    border: 5px dashed #e63531;
+    width: 842px;
+    height: 210px;
+    border-radius: 10px;
+  }
+  .dz-default:hover{
+    opactiy: 0.5;
+  }
+  #upload-photo-div{
+    padding-top: 50px;
+    width: 800px;
+    display: block;
+    margin: auto;
+  }
+  .preview-post { 
+    width: 200px;
+    height: 340px;
+    margin: 5px;
+    float: left;
+    border: 1px solid lightgray;
+    border-radius: 3px 3px 3px 3px;
+    font-size: 12px;
+    background-color: #fff;
+    font-family: 'Open Sans', Helvetica Neue, Helvetica, arial, sans-serif;
+  }
+
+  .preview-post img{
+    border-radius: 0 0 3px 3px;
+    width: 100%;
+  }
+
+  .preview-post-body{
+    margin: 5px;
+  }
+  
+  .delete-preview {
+    float: right;
+    padding: 0px 5px 5px 0px;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 1;
+    color: #000000;
+    text-shadow: 0 1px 0 #ffffff;
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+  }
+  
+  .delete-preview:hover,
+  .delete-preview:focus {
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+  }
+
+</style>

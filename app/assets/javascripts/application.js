@@ -17,5 +17,5 @@
 //= require underscore
 //= require masonry
 //= require imagesloaded
-//= require jquery.infinitescroll
+//= require dropzone
 //= require_tree .

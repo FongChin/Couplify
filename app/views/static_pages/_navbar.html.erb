@@ -16,6 +16,10 @@
           <a href="/couples/<%= current_user.couple.profile_name %>/" id="" >Profile</a>
         </li>
           <li>
+            <a href="/couples/<%= current_user.couple.id %>/posts/new" id="" >
+              Add Posts</a>
+          </li>
+          <li>
             <a href="/couples/<%= current_user.couple.profile_name %>/edit" id="" >Edit Couplify Profile</a>
           </li>
           <% end %>
