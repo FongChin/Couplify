@@ -8,6 +8,11 @@ class InvitesController < ApplicationController
   def create
     params[:invite][:user_id] = current_user.id
     @invite = Invite.new(params[:invite])
+    if current_user.email == params[:invite][:p_email]
+      flash[:notice] = "You can't invite yourself."
+      render 'new'
+      return
+    end
     if @invite.save
       # send an email to the partner
       @msg = InviteEmailMailer.invite_email(@invite)

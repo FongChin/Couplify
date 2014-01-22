@@ -7,13 +7,25 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <meta property="og:title" content="Couplify" />
+  <meta property="og:site_name" content="Couplify"/>
+  <meta property="og:url" content="http://www.couplify.me" />
+  <meta property="og:description" content="Couplify is an app to share private moments with your significant other" />
+  <meta property="fb:app_id" content="205979906274122" />
+  <meta property="og:image" content="http://couplified.me/assets/images/main_background.jpg" />
 </head>
 <body>
   <% if notice %>
+  <div class="alert alert-info">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     <p class="notice"><%= notice %></p>
+  </div>
   <% end %>
   <% if alert %>
-    <p class="alert"><%= alert %></p>
+    <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <p class="notice"><%= alert %></p>
+    </div>
   <% end %>
 <% if flash[:errors] %>
   <% flash[:errors].each do |error| %>

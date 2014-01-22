@@ -33,6 +33,7 @@ html {
 }
 body {
   margin: 0;
+  font-family: 'Open Sans', Helvetica, arial, sans-serif !important;
 }
 a {
   background: transparent;
@@ -259,7 +260,7 @@ body {
   font-size: 14px;
   line-height: 1.428571429;
   color: #122430;
-  background-color: #fffce2;
+  background-color: #f2f2ec;
 }
 input,
 button,
@@ -337,7 +338,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
   line-height: 1.1;
   color: inherit;
@@ -3660,8 +3661,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
   .navbar-fixed-top .navbar-collapse,
   .navbar-static-top .navbar-collapse,
   .navbar-fixed-bottom .navbar-collapse {
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 50px;
+    padding-right: 50px;
   }
 }
 .container > .navbar-header,
@@ -4404,6 +4405,9 @@ a.thumbnail.active {
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
+  position: absolute;
+  width: 100%;
+  z-index: 100;
 }
 .alert h4 {
   margin-top: 0;
@@ -4877,9 +4881,10 @@ a.list-group-item.active:focus .list-group-item-text {
 .well {
   min-height: 20px;
   padding: 19px;
+  margin-top: 5px;
+  width: 100%;
   margin-bottom: 20px;
-  background-color: #ebd2b5;
-  border: 1px solid #e3c199;
+  background-color: #e63531;
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);

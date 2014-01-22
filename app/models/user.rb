@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
                   :last_name, :profile_image, :remember_me
 
   has_attached_file :profile_image, :styles => { 
-    :medium => "300x300>", 
+    :medium => "x250", 
     :thumb => "30x30#" 
   }, :default_url => "/assets/:style/missing.jpg"
   

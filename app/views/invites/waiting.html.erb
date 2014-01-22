@@ -1,1 +1,9 @@
-<p>You are still waiting for <%= @invite.p_email %>'s response.</p>
+<div class="row" style="padding-top: 100px;">
+  <h4 class="text-center">Hey <%= current_user.first_name.capitalize %>, you are still waiting for <%= @invite.p_email %>'s repsonse.</h4>
+  <br />
+  <div class="col-xs-9 col-xs-offset-3">
+
+    <img src="/assets/cuplify.jpg" alt="" id="partner" class="profile-img"/>
+    <img src="/assets/loading.gif" alt="" id="loading"/>
+  </div>
+</div>

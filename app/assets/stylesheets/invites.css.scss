@@ -1,3 +1,16 @@
 // Place all the styles related to the invites controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#loading{
+  position: absolute;
+  left: 160px;
+  top: 100px;
+}
+.profile-img{
+  height: 250px;
+  border-radius: 3px;
+}
+#partner{
+  opacity: 0.6;
+}

@@ -2,6 +2,43 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#cover-photo{
+  height: 500px;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#profile-cover{
+  height: 400px;
+  color: white;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.user-profile-img{
+  width: 240px;
+  height: 40%;
+  border: dotted #fff 1px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+#heart-profile-info{
+  width: 300px;  
+}
+
+#profile-info{
+  position: relative;
+  text-align: center;
+  top: -200px;
+  overflow: hidden;
+}
+
 .post { 
   width: 230px;
   margin: 5px;
@@ -10,7 +47,7 @@
   border-radius: 3px 3px 3px 3px;
   font-size: 12px;
   background-color: #fff;
-  font-family: 'Helvetica Neue', Helvetica, arial, sans-serif;
+  font-family: 'Open Sans', Helvetica Neue, Helvetica, arial, sans-serif;
 }
 
 .post img{

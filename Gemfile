@@ -33,7 +33,7 @@ gem 'aws-sdk'
 
 gem 'mail'
 gem 'rmagick', :require => 'RMagick'
-
+gem 'kaminari'
 gem 'pusher'
 
 group :development do

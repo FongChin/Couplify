@@ -8,14 +8,17 @@
     </button>
     <a href="/" class="navbar-brand">Couplify</a>
   </div>
-  <% if current_user %>
   <div class="collapse navbar-collapse" id="navbar">
-    <ul class="nav navbar-nav navbar-right" style="margin-right: 25px;">
-      <% if current_user.couple %>
+    <ul class="nav navbar-nav navbar-right">
+      <% if current_user %>
+        <% if current_user.couple %>
         <li>
-          <a href="/couples/<%= current_user.couple.profile_name %>/edit" id="" >Edit Couplify Profile</a>
+          <a href="/couples/<%= current_user.couple.profile_name %>/" id="" >Profile</a>
         </li>
-      <% end %>
+          <li>
+            <a href="/couples/<%= current_user.couple.profile_name %>/edit" id="" >Edit Couplify Profile</a>
+          </li>
+          <% end %>
       <li>
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           <span><%= current_user.first_name %> <%= current_user.last_name %></span>
@@ -30,7 +33,39 @@
         <%= link_to("Sign Out", destroy_user_session_url, 
           {:method => :delete })%>
       </li>
+      <% else %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign In <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li class="col-xs-12 text-center" style="width: 280px;">        
+              <form action="/users/sign_in" method="post">
+                <input type="hidden" name="utf8" value="&#x2713;"/>
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                <div class="form-group">
+                  <input type="email" class="form-control" autofocus="autofocus" name="user[email]"
+                      placeholder="Email"/>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" name="user[password]"
+                      placeholder="Password"/>
+                </div>
+                <div class="form-group">
+                  <input type="hidden" value="0" name="user[remember_me]"/>
+                  <input type="checkbox" value="1" name="user[remember_me]"/>
+                  <label for="user_remember_me" style="color: white;">Remember me</label>
+                </div>
+                <div class="form-group">
+                  <input type="submit" class="btn btn-info" value="Sign In"/>
+                </div>
+              </form>
+            </li>
+            <li><a href="/users/sign_up">Sign up</a></li>
+            <li><a href="/users/password/new">Forgot your password?</a></li>
+            <li><a href="/users/confirmation/new">Didn&#x27;t receive confirmation instructions?</a></li>
+          </ul>
+        </li>
+      <% end %>
     </ul>
   </div>
-  <% end %>
+
 </nav>

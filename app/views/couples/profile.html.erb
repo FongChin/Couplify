@@ -1,71 +1,28 @@
-<div class="jumbotron">
-  <div class="container">
-    <h1><%= @u1.first_name %> and <%= @u2.first_name %></h1>
+<div class="row text-center" id="profile-cover">
+  <img src="/assets/cover-photo.jpg" alt="" id="cover-photo"/>
+  <div class="col-md-4" style="padding-top: 20px;">
+    <%= image_tag @u1.profile_image.url(:medium), :class => "user-profile-img" %>
+    <img src="/assets/heart-shadow.jpg" alt="" id=""/>
+    <h2><%= @u1.first_name.capitalize %></h2>
   </div>
-  <div class="row">
-    <% @couple.attributes.each do |attr_name, value| %>
-      <p><%= attr_name %>: <%= value %></p>
-    <% end %>
-    <p>Anniversary: <span id="anniversary-date"><%= @couple.anniversary_date %></span></p>
-    <!-- <button class="btn btn-primary" id="show-edit-couple-modal" 
-       data-toggle="modal" data-target="#edit-couple-info">Edit Couplify Profile</button> -->
+  <div class="col-md-4">
+    <img src="/assets/red-heart-icon.png" alt="" id="heart-profile-info"/>
+    <div id="profile-info">
+      <p>Anniversary: <span id="anniversary-date"><%= @couple.anniversary_date %></span></p>
+      <p>Email: <span id="profile-name"><%= @couple.profile_name %>@couplify.me</span></p>
+    </div>
+  </div>
+  <div class="col-md-4" style="padding-top: 20px;">
+    <%= image_tag @u2.profile_image.url(:medium), :class => "user-profile-img" %>
+    <img src="/assets/heart-shadow.jpg" alt="" id=""/>
+    <h2><%= @u2.first_name.capitalize %></h2>
   </div>
 </div>
+
 <div class="main-container">
 
   <div class="row">    
     <div id="posts-div"></div>
-  </div>
-</div>
-
-
-<div class="modal fade" id="edit-couple-info" tabindex="-1" >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Profile</h4>
-      </div>
-      <div class="modal-body" >
-        <div class="row">
-          <form action="<%= couple_url(@couple) %>" role="form" class="form-horizontal" id="edit-couple-form" method="POST">
-            <input type="hidden" name="_method" value="PUT"/> <!-- _method = put? -->
-            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-            <input type="hidden" id="old_profile_name" name="old_profile_name" value="<%= @couple.profile_name %>" />
-            <div class="form-group">
-              <label for="anniversary-date" class="col-xs-5 col-md-4 control-label">Anniversary</label>
-              <div class="col-xs-4 col-md-8">
-                <input type="date" class="form-control" id="modal-anniversary-date"
-                        name="couple[anniversary_date]" value="<%= @couple.anniversary_date %>" />
-              </div>
-            </div>
-            <div class="form-group" id="profile-name-form-div">
-              <label for="profile-name" class="col-xs-5 col-md-4 control-label">Profile name/Couplify email</label>
-              <div class="col-xs-3 col-md-8">
-                <input type="text" class="form-control" id="modal-profile-name"
-                        name="couple[profile_name]" value="<%= @couple.profile_name %>" />
-              </div>
-            </div>
-            <div class="form-group hidden" id="profile-name-error-div">
-              <div class="col-xs-offset-3 col-xs-6">
-                <div style="padding: 5px;">
-                  <!-- <span class="glyphicon glyphicon-ban-circle"></span> -->
-                  <span id="profile-name-error-msg"></span>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-xs-offset-5 col-xs-6">
-                <button type="submit" class="btn btn-primary" id="submit-couple-edit">Save Changes</button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -105,12 +62,11 @@
   var COUPLE_ID = <%= @couple.id %>;
   var u1 = <%= @u1.basic_info_in_json %>;
   var u2 = <%= @u2.basic_info_in_json %>;
-  var coupleName = "<%= @couple.profile_name %>";
-  var coupleAnniversaryDate = "<%= @couple.anniversary_date %>";
+  var NUM_POSTS = <%= @num_posts %>;
   var date_options = {
     weekday: "long", year: "numeric", month: "short",
     day: "numeric", hour: "2-digit", minute: "2-digit"
   }
   var $posts_container = $('#posts-div');
-  
 </script>
+<script type="text/javascript" src="/assets/couplify_profile.js"></script>

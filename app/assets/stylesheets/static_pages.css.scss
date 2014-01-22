@@ -2,17 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#welcome {
-  height: 600px;
-}
-
-#container-1-bg{
-  width: 100%;
-  height: auto;
-  position: absolute;
-  top: 50;
-  left: 0;
-  z-index: -1;
+#home{
+  height: 100%;
+  background-image: url("/assets/home/main_background.jpg");
+  background-size: contain;
+  background-size: 450px;
+  background-repeat: repeat;
 }
 
 .centralized {
@@ -20,11 +15,19 @@
   margin-top: 10%;
 }
 
-h1 {
+#logo-box{
+  width: 320px;
+  height: 290px;
+  background-image: url("/assets/home/origami-heart.png");
+  margin: auto;
+}
+
+.logo{
   font-family: 'Open Sans', sans-serif;
   color: #fff;
   line-height: 70px;
-  font-size: 80px;
+  font-size: 70px;
+  padding-top: 80px;
 }
 
 @media screen and (max-width: 568px) {

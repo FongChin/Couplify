@@ -9,6 +9,9 @@ Couplify::Application.routes.draw do
   end
   
   resources :couples, :only => [:create, :update] do
+    member do
+      resources :posts, :only => [:index]
+    end
     collection do
       get ":profile_name", :to => "couples#profile", :as => :profile
       get ":profile_name/edit", :to => "couples#edit", :as => :edit_profile
