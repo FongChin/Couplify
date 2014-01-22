@@ -15,7 +15,8 @@ class CouplesController < ApplicationController
   def update
     @couple = Couple.find(params[:id])
     if @couple.update_attributes(params[:couple])
-      render :json => @couple
+      print "#{root_url}couples/#{@couple.profile_name}"
+      redirect_to "/couples/#{@couple.profile_name}"
     else
       @errors = @couple.errors.full_messages
       render 'edit'
