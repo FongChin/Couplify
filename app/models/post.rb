@@ -1,9 +1,12 @@
 class Post < ActiveRecord::Base
-  attr_accessible :body, :couple_id, :image_url, :user_id
+  attr_accessible :body, :couple_id, :image, :user_id
   
   validates :user_id, :couple_id, :presence => true
   
   belongs_to :couple
   belongs_to :owner, :class_name => "User"
   
+  has_attached_file :image, :styles => { 
+    :medium => "500x500>"
+  }#, :default_url => "/assets/:style/missing.jpg"
 end
