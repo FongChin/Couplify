@@ -59,8 +59,7 @@ class IncomingEmailsController < ApplicationController
   def save_attachment(attachment, couple_id)
     if attachment
       
-      printa attachment.tempfile.read
-      EmailError.new(:error_msg => attachment.tempfile.read).save!
+      printa attachment
       printa attachment.tempfile.to_path.to_s
       
       
