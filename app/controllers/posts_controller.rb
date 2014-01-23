@@ -1,11 +1,11 @@
 class PostsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :current_user_owns_profile!
+  before_filter :current_user_owns_profile!, :only => [:index]
   
   def index
     @couple = Couple.find(params[:id])
     @posts = @couple.posts.page(params[:page]).per(20).includes(:owner).order('created_at DESC')
-    render :json => @posts
+    render :json => @posts.to_json(:methods => [:image_url]).html_safe 
   end
   
   def destroy
@@ -19,11 +19,21 @@ class PostsController < ApplicationController
   end
   
   def create
-    p "==========================="
-    p "==========================="
-    p params
-    p "==========================="
-    p "==========================="
-    render :text => "Success"
+    @couple = Couple.find_by_profile_name(params[:profile_name])
+    params[:post][:user_id] = current_user.id
+    @post = @couple.posts.new(params[:post])
+    if @post.save
+      render :json => @post
+    else
+      render :json => {:status => :unprocessable_entitiy}
+    end
+  end
+  
+  def update_posts
+    if Post.update(params[:posts].keys, params[:posts].values)
+    else
+      flash[:alert] = "Error saving your posts"  
+    end
+    redirect_to "/couples/#{params[:profile_name]}"
   end
 end

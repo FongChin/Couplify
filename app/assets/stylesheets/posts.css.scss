@@ -1,0 +1,59 @@
+.dz-default{
+  border: 5px dashed #e63531;
+  width: 842px;
+  height: 210px;
+  border-radius: 10px;
+}
+.dz-default:hover{
+  opactiy: 0.5;
+}
+#upload-photo-div{
+  padding-top: 50px;
+  width: 800px;
+  display: block;
+  margin: auto;
+}
+.preview-post { 
+  width: 200px;
+  margin: 5px;
+  float: left;
+  border: 1px solid lightgray;
+  border-radius: 3px 3px 3px 3px;
+  font-size: 12px;
+  background-color: #fff;
+  font-family: 'Open Sans', Helvetica Neue, Helvetica, arial, sans-serif;
+}
+
+.preview-post img{
+  border-radius: 0 0 3px 3px;
+  width: 100%;
+}
+
+.preview-post-body{
+  margin: 5px;
+}
+
+#submit-btn{
+  margin-top: 50px;
+}
+
+.delete-preview {
+  float: right;
+  padding: 0px 5px 5px 0px;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 1;
+  color: #000000;
+  text-shadow: 0 1px 0 #ffffff;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+}
+
+.delete-preview:hover,
+.delete-preview:focus {
+  color: #000000;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}

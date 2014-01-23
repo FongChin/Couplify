@@ -13,4 +13,9 @@ class Post < ActiveRecord::Base
   def image_url
     (self.image_file_name.nil?) ? nil : self.image.url
   end
+  
+  def to_json(options)
+    p "to_json is called"
+    super(:methods => [:image_url])
+  end
 end

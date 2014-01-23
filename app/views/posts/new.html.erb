@@ -9,22 +9,28 @@
         <h2 class="text-center">Drag and Drop files to upload picture</h2>
       </div>
       <br />
+    </form>
+    <form action="/couples/<%= @couple.profile_name %>/update_posts" method="POST" id="put-form" class="hidden">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+      <input type="hidden" name="_method" value="PUT" />
+      <div id="preview-posts"></div>
       <div class="text-center" id="submit-btn-div">
-        <button class="btn btn-primary btn-lg btn-block hidden" type="submit" id="submit-btn">Save</button>
+        <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit-btn">Save</button>
       </div>
     </form>
   </div>
+  
 </div>
 
 <script type="text/template" id="preview-template">
   <div class="preview-post dz-preview">
-     <span class="delete-preview">x</span>
+     <button class="delete-preview">x</button>
+     <input type="hidden" class="preview-post-id" name="posts[id]" value=""/>
      <div class="preview-post-body">
-        <textarea rows="3" class="form-control" name="post[body]" placeholder="your message" /></textarea>
+        <textarea rows="3" class="form-control preview-post-body-textarea" name="posts[body]" placeholder="your message" /></textarea>
      </div>
      <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
      <div class="dz-error-message"><span data-dz-errormessage></span></div>
-     <input type="hidden" class="preview-post-thumbnail-data" name="post[image]" />
      <img data-dz-thumbnail alt="" class="">
      <div class="dz-filename text-center"><span data-dz-name></span></div>
      <div class="dz-size text-center" data-dz-size></div>
@@ -32,95 +38,28 @@
 </script>
 
 <script type="text/javascript">
-  (function(root){
-    Couplify = root.Couplify = root.Couplify || {};
-    var previewTemplate = $('#preview-template').html();
-    
-    var fileAddedCallback = function (file, url){
-      console.log(url);
-      $(file.previewTemplate).find('.preview-post-thumbnail-data').val(url);
+  var previewTemplate = $('#preview-template').html();
+
+  var fileAddedCallback = function (file, url){
+    console.log('thumbnail is first?')
+    $('#dropzone-form').addClass('hidden');
+  }
+
+  var fileUploadSuccess = function(file, data, error){
+    $(file.previewTemplate).find('.preview-post-body-textarea').attr('name', 'posts[' + data.id + '][body]');
+    $(file.previewTemplate).find('.preview-post-id').attr('name', 'posts[' + data.id + '][id]');
+    $(file.previewTemplate).find('.preview-post-id').attr('value', data.id);
+    $(file.previewTemplate).find('.delete-preview').attr('data-id', data.id);
+    $('#preview-posts').append(file.previewTemplate);
+    $('#put-form').removeClass('hidden');
+  }
+
+  Dropzone.options.dropzoneForm = {
+    previewTemplate: previewTemplate,
+    paramName: "post[image]",
+    init: function(){
+      this.on("thumbnail", fileAddedCallback);
+      this.on("success", fileUploadSuccess);
     }
-    
-    var fileUploadSuccess = function(){
-      console.log('completemultiple')
-      if ($('#dropzone-form').find('.dz-default')){
-        $('#dropzone-form').find('.dz-default').remove();
-        $('#submit-btn').removeClass('hidden');
-        $('#dropzone-form').attr('action', '/couples/<%= @couple.profile_name %>/posts');
-      }
-    }
-    
-    root.Dropzone.options.dropzoneForm = {
-      previewTemplate: previewTemplate,
-      init: function(){
-        this.on("thumbnail", fileAddedCallback);
-        this.on("success", fileUploadSuccess);
-      }
-    }
-  })(this);
-  
-  $('#upload-photo-div').on('click', '.delete-preview', function(event){
-    $(event.target).parent().remove();
-  });
-  
+  }
 </script>
-
-<style type="text/css">
-  .dz-default{
-    border: 5px dashed #e63531;
-    width: 842px;
-    height: 210px;
-    border-radius: 10px;
-  }
-  .dz-default:hover{
-    opactiy: 0.5;
-  }
-  #upload-photo-div{
-    padding-top: 50px;
-    width: 800px;
-    display: block;
-    margin: auto;
-  }
-  .preview-post { 
-    width: 200px;
-    height: 340px;
-    margin: 5px;
-    float: left;
-    border: 1px solid lightgray;
-    border-radius: 3px 3px 3px 3px;
-    font-size: 12px;
-    background-color: #fff;
-    font-family: 'Open Sans', Helvetica Neue, Helvetica, arial, sans-serif;
-  }
-
-  .preview-post img{
-    border-radius: 0 0 3px 3px;
-    width: 100%;
-  }
-
-  .preview-post-body{
-    margin: 5px;
-  }
-  
-  .delete-preview {
-    float: right;
-    padding: 0px 5px 5px 0px;
-    font-size: 15px;
-    font-weight: bold;
-    line-height: 1;
-    color: #000000;
-    text-shadow: 0 1px 0 #ffffff;
-    opacity: 0.2;
-    filter: alpha(opacity=20);
-  }
-  
-  .delete-preview:hover,
-  .delete-preview:focus {
-    color: #000000;
-    text-decoration: none;
-    cursor: pointer;
-    opacity: 0.5;
-    filter: alpha(opacity=50);
-  }
-
-</style>

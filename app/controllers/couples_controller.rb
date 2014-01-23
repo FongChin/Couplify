@@ -4,7 +4,8 @@ class CouplesController < ApplicationController
   
   def profile
     @couple = Couple.find_by_profile_name(params[:profile_name])
-    @posts = @couple.posts.page(1).per(20).includes(:owner).order('created_at DESC')
+    @posts_data = @couple.posts.page(1).per(20).includes(:owner)
+                    .order('created_at DESC').to_json(:methods => [:image_url]).html_safe 
     @u1 = User.find(@couple.u1_id)
     @u2 = User.find(@couple.u2_id)
     @num_posts = @couple.posts.count

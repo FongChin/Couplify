@@ -1,6 +1,4 @@
 Couplify::Application.routes.draw do
-  get "static_pages/home"
-
   devise_for :users
 
   resources :invites, :only => [:create, :new, :update, :destroy] do
@@ -13,6 +11,7 @@ Couplify::Application.routes.draw do
       resources :posts, :only => [:index]
     end
     collection do
+      put ":profile_name/update_posts", :to => "posts#update_posts"
       get ":profile_name/add_posts", :to => "posts#new", :as => :new_posts
       post ":profile_name/posts", :to => "posts#create", :as => :add_posts
       get ":profile_name", :to => "couples#profile", :as => :profile

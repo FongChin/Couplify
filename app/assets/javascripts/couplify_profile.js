@@ -85,17 +85,13 @@ $('document').ready(function(){
   $('#posts-div').on("click", '.delete-post', function(event){
     var $postDiv = $($(event.target).parent());
     var postId = $(event.target).data('id');
-    console.log('post deleting')
-    $.ajax({
-      type: 'DELETE',
-      url: '/posts/' + postId,
-      success: function(){
-        console.log("post deleted");
-        Couplify.$posts_container.masonry()
-                        .masonry('remove', $postDiv)
-                        .masonry();
-      }
-    })
+    var success = function(){
+      console.log("post deleted");
+      Couplify.$posts_container.masonry()
+                               .masonry('remove', $postDiv)
+                               .masonry();
+    }
+    Couplify.delete_post(postId, success);
   })
   
   var callback = _.throttle(infiniteScroll.fetch.bind(infiniteScroll), 200);
