@@ -60,6 +60,7 @@ class IncomingEmailsController < ApplicationController
     if attachment
       
       printa attachment.tempfile.read
+      EmailError.new(:error_msg => attachment.tempfile.read).save!
       printa attachment.tempfile.to_path.to_s
       
       
