@@ -1,15 +1,16 @@
 <div class="row">
   <br />
   <div id="upload-photo-div" >
-    <form action="/couples/<%= @couple.id %>/posts" method="POST" 
+    <form action="/couples/<%= @couple.profile_name %>/posts" method="POST" 
           enctype="multipart/form-data"
           class="dropzone" id="dropzone-form" >
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
       <div class="dz-default dz-message">
         <h2 class="text-center">Drag and Drop files to upload picture</h2>
       </div>
-      <div>
-        <button class="btn btn-primary" type="submit">Save</button>
+      <br />
+      <div class="text-center" id="submit-btn-div">
+        <button class="btn btn-primary btn-lg btn-block hidden" type="submit" id="submit-btn">Save</button>
       </div>
     </form>
   </div>
@@ -23,7 +24,7 @@
      </div>
      <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
      <div class="dz-error-message"><span data-dz-errormessage></span></div>
-     <input type="hidden" class="preview-post-thumbnail-data" name="post[data_url]" />
+     <input type="hidden" class="preview-post-thumbnail-data" name="post[image]" />
      <img data-dz-thumbnail alt="" class="">
      <div class="dz-filename text-center"><span data-dz-name></span></div>
      <div class="dz-size text-center" data-dz-size></div>
@@ -36,17 +37,24 @@
     var previewTemplate = $('#preview-template').html();
     
     var fileAddedCallback = function (file, url){
-      window.file = file;
-      console.log(file);
       console.log(url);
       $(file.previewTemplate).find('.preview-post-thumbnail-data').val(url);
     }
     
+    var fileUploadSuccess = function(){
+      console.log('completemultiple')
+      if ($('#dropzone-form').find('.dz-default')){
+        $('#dropzone-form').find('.dz-default').remove();
+        $('#submit-btn').removeClass('hidden');
+        $('#dropzone-form').attr('action', '/couples/<%= @couple.profile_name %>/posts');
+      }
+    }
+    
     root.Dropzone.options.dropzoneForm = {
       previewTemplate: previewTemplate,
-      maxFiles: 1,
       init: function(){
         this.on("thumbnail", fileAddedCallback);
+        this.on("success", fileUploadSuccess);
       }
     }
   })(this);

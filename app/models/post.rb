@@ -8,5 +8,9 @@ class Post < ActiveRecord::Base
   
   has_attached_file :image, :styles => { 
     :medium => "500x500>"
-  }#, :default_url => "/assets/:style/missing.jpg"
+  }
+  
+  def image_url
+    (self.image_file_name.nil?) ? nil : self.image.url
+  end
 end
