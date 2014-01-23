@@ -12,17 +12,17 @@ class IncomingEmailsController < ApplicationController
       raise "sender is not one of the owners" unless is_sender_owner
       
       if sender_id && couple_id 
-        body = params["text"]
+        body = params["subject"]
         attachment = params["attachment1"]
-        img_url = save_attachment(attachment, couple_id)
-        
+        # img_url = save_attachment(attachment, couple_id)
+        img_url = attachment
         printa img_url
         
         post = Post.new(
           :couple_id => couple_id,
           :user_id => sender_id,
           :body => body,
-          :image_url => img_url
+          :image => img_url
         )
         if post.save
           printa post
