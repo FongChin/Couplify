@@ -24,7 +24,7 @@ class IncomingEmailsController < ApplicationController
         if post.save
           begin
             Pusher["couple_#{couple_id}"].trigger("new_post_event", { 
-              post: post.to_json 
+              post: post.to_json
             })
           rescue Pusher::Error => e
             # save it in the database?
