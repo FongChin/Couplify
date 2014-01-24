@@ -41,10 +41,10 @@
     <a href="/posts/<%%= post.id %>/edit" style="padding-top: 1px; float: right;">Edit Post</a>
     <div class="author-info">
       <%% if (Couplify.u1.id == post.user_id) { %>
-        <img src="<%= @u1.profile_image.url(:thumb) %>" alt="<%= @u1.first_name %>" class="author-img" />
+        <img src="<%%= Couplify.u1.profile_image_url %>" alt="<%%= Couplify.u1.first_name %>" class="author-img" />
         <span class="text-left author-name"><%%= Couplify.u1.first_name %></span>
       <%% }else if (Couplify.u2.id == post.user_id){ %>
-        <img src="<%= @u1.profile_image.url(:thumb) %>" alt="<%= @u2.first_name %>" class="author-img" />
+        <img src="<%%= Couplify.u2.profile_image_url %>" alt="<%%= Couplify.u2.first_name %>" class="author-img" />
         <span class="text-left author-name"><%%= Couplify.u2.first_name %></span>
       <%% } %>
       <span class="post-time"><%%= (new Date(post.created_at)).toLocaleTimeString("en-us", Couplify.date_options) %></span>
@@ -66,6 +66,8 @@
   Couplify.COUPLE_ID = <%= @couple.id %>;
   Couplify.u1 = <%= @u1.basic_info_in_json %>;
   Couplify.u2 = <%= @u2.basic_info_in_json %>;
+  Couplify.u1["profile_image_url"] = "<%= @u1.profile_image.url(:thumb) %>";
+  Couplify.u2["profile_image_url"] = "<%= @u2.profile_image.url(:thumb) %>";
   Couplify.NUM_POSTS = <%= @num_posts %>;
   Couplify.date_options = {
     weekday: "long", year: "numeric", month: "short",

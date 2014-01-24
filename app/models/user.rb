@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_attached_file :profile_image, :styles => { 
     :medium => "x250", 
     :thumb => "30x30#" 
-  }, :default_url => "/assets/:style/missing.jpg"
+  }, :default_url => "http://couplify.herokuapp.com/assets/medium/missing.jpg"
   
   has_many :invitations, :class_name => "Invite", :foreign_key => :user_id
   
