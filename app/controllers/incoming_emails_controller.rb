@@ -53,6 +53,7 @@ class IncomingEmailsController < ApplicationController
       email_error.save!
     ensure
       render :text => "making sure I render something for the sake of sendgrid"
+      return "something"
     end
   end
   

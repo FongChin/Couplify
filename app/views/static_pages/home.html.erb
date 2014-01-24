@@ -12,20 +12,21 @@
     <div id="logo-box" class="text-center">
       <h1 class="logo">Couplify</h1>
     </div>
+    <br />
     <a href="/users/sign_up" class="btn btn-primary">Sign Up</a>
-    <form action="/users/sign_in" method="POST">
+    <form action="/users/sign_in" method="POST" style="margin-top: 20px;">
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
       <input type="hidden" name="user[email]" value="couplify.one@gmail.com" />
       <input type="hidden" name="user[password]" value="abcdefgh" />
-      <button class="btn btn-primary" type="submit">Log in as guest #1</button>
+      <button class="btn btn-primary" type="submit">Log in as guest</button>
     </form>
-    <br />
+<!-- 
     <form action="/users/sign_in" method="POST">
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
       <input type="hidden" name="user[email]" value="couplify.two@gmail.com" />
       <input type="hidden" name="user[password]" value="abcdefgh" />
       <button class="btn btn-primary" type="submit">Log in as guest #2</button>
-    </form>
+    </form> -->
     <div style="margin-bottom: 30px;">
       
     </div>    
