@@ -19,6 +19,7 @@
       <input type="hidden" name="user[password]" value="abcdefgh" />
       <button class="btn btn-primary" type="submit">Log in as guest #1</button>
     </form>
+    <br />
     <form action="/users/sign_in" method="POST">
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
       <input type="hidden" name="user[email]" value="couplify.two@gmail.com" />

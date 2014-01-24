@@ -8,7 +8,7 @@ class Post < ActiveRecord::Base
   
   has_attached_file :image, 
                     :styles => { :medium => "500x500>" }, 
-                    :pre_convert_options => "-auto-orient"
+                    :processors => [:no_rotation]
   
   def image_url
     (self.image_file_name.nil?) ? nil : self.image.url
