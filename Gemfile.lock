@@ -83,9 +83,6 @@ GEM
       rails (>= 3, < 5)
     hike (1.2.3)
     i18n (0.6.9)
-    jbuilder (2.0.2)
-      activesupport (>= 3.0.0)
-      multi_json (>= 1.2.0)
     journey (1.0.4)
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
@@ -198,7 +195,6 @@ DEPENDENCIES
   devise
   ejs
   figaro
-  jbuilder
   jquery-rails
   kaminari
   launchy
