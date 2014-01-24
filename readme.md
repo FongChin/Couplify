@@ -12,3 +12,6 @@
 - [] multiple couplify profiles for a user
 - [] auto-orient the images as users upload 
 - [] ask users to confirm while deleting posts
+- [] add timeline to the profile
+- [] change edit post page to modal
+- [x] add progress bar while uploading multitple pictures
