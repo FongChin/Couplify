@@ -4,7 +4,7 @@ class IncomingEmailsController < ApplicationController
     printa "action received"
 
     begin
-      ###### if to_email is sf@couplify.me, skip validation
+      ###### if to_email is sf@couplify.me, skip validation and trigger the new_post_event
 
       email = Mail::Address.new(params["to"]).address
       if email == "sf@couplify.me"
@@ -12,7 +12,7 @@ class IncomingEmailsController < ApplicationController
         return
       end
 
-      ######
+      ############
       
       sender_id = User.get_id_from_email(params["from"])
       couple_id = Couple.get_couple_id(params["to"])
@@ -89,10 +89,10 @@ class IncomingEmailsController < ApplicationController
           printa Pusher::Error
         end
       else
-        raise post.errors.full_messages
+        return post.errors.full_messages
       end
     else
-      return raise 'either sender id or couple id is nil'
+      return 'either sender id or couple id is nil'
     end
   end
 end
