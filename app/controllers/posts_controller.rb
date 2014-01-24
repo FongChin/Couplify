@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   def index
     @couple = Couple.find(params[:id])
     @posts = @couple.posts.page(params[:page]).per(20).includes(:owner).order('created_at DESC')
-    render :json => @posts.to_json #(:methods => [:image_url]).html_safe 
+    render :json => @posts.to_json(:methods => [:image_url]).html_safe
   end
   
   def destroy
@@ -23,7 +23,7 @@ class PostsController < ApplicationController
     params[:post][:user_id] = current_user.id
     @post = @couple.posts.new(params[:post])
     if @post.save
-      render :json => @post
+      render :json => @post.include_image_link_json
     else
       render :json => {:status => :unprocessable_entitiy}
     end

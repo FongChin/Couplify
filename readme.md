@@ -10,3 +10,5 @@
 ### To-Dos
 - [] convert profile html to PDF
 - [] multiple couplify profiles for a user
+- [] auto-orient the images as users upload 
+- [] ask users to confirm while deleting posts

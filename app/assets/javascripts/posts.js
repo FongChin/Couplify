@@ -11,11 +11,15 @@ $(document).ready(function(){
     $(file.previewTemplate).find('.preview-post-id').attr('value', data.id);
     $(file.previewTemplate).find('.delete-preview').attr('data-id', data.id);
     $('#preview-posts').append(file.previewTemplate);
+    // remove the form much later?
     $('#put-form').removeClass('hidden');
   }
 
   var fileProcessingCallback = function(){
     console.log("processing");
+    $('.dz-default').removeClass('dz-message');
+    $('#dz-instruction').addClass('hidden');
+    $('#uploading-image').removeClass('hidden');
   }
 
   Dropzone.options.dropzoneForm = {
