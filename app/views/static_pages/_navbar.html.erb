@@ -29,7 +29,8 @@
         </a>
         <ul class="dropdown-menu">
           <li>            
-            <a href="/users/edit"><span style="margin-right: 5px;"><%= image_tag current_user.profile_image.url(:thumb) %></span> Edit Info</a>
+            <a href="/users/edit"><span style="margin-right: 5px;">
+            <%= image_tag current_user.profile_image.url(:thumb), :class => "fixed-thumbnail" %></span> Edit Info</a>
           </li>
         </ul>
       </li>

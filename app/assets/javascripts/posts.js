@@ -1,25 +1,27 @@
 $(document).ready(function(){
   var previewTemplate = $('#preview-template').html();
 
-  var fileAddedCallback = function (file, url){
-    $('#dropzone-form').addClass('hidden');
-  }
-
   var fileUploadSuccess = function(file, data, error){
     $(file.previewTemplate).find('.preview-post-body-textarea').attr('name', 'posts[' + data.id + '][body]');
     $(file.previewTemplate).find('.preview-post-id').attr('name', 'posts[' + data.id + '][id]');
     $(file.previewTemplate).find('.preview-post-id').attr('value', data.id);
     $(file.previewTemplate).find('.delete-preview').attr('data-id', data.id);
     $('#preview-posts').append(file.previewTemplate);
-    // remove the form much later?
-    $('#put-form').removeClass('hidden');
+    $('#preview-posts').imagesLoaded(function(){
+      $('#preview-posts').masonry('reloadItems').masonry('layout');
+    });
+    // $('#put-form').removeClass('hidden');
   }
 
-  var fileProcessingCallback = function(){
-    console.log("processing");
+  var fileProcessingCallback = function(progress, totalBytes, totalBytesSent){
+    if (progress == 100){
+      $('#dropzone-form').addClass('hidden');
+      $('#put-form').removeClass('hidden');
+    }
+    $('#progress-bar').css('width', progress + '%');
     $('.dz-default').removeClass('dz-message');
-    $('#dz-instruction').addClass('hidden');
-    $('#uploading-image').removeClass('hidden');
+    $('.uploading').removeClass('hidden');
+    $('#dz-instruction').css('visibility', 'hidden');
   }
 
   Dropzone.options.dropzoneForm = {
@@ -28,8 +30,7 @@ $(document).ready(function(){
     autoProcessQueue: true,
     paramName: "post[image]",
     init: function(){
-      this.on("thumbnail", fileAddedCallback);
-      this.on("processing", fileProcessingCallback)
+      this.on("totaluploadprogress", fileProcessingCallback)
       this.on("success", fileUploadSuccess);
     }
   }
@@ -43,7 +44,7 @@ $(document).ready(function(){
     var success = function(){
       $postDiv.remove();
       if (isLastPost){
-        window.history.back();
+        window.location = $('#nav-profile-link').attr('href');
       }
     }
     Couplify.delete_post(postId, success);

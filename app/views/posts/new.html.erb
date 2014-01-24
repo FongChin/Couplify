@@ -6,8 +6,12 @@
           class="" id="dropzone-form" >
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
       <div class="dz-default dz-message">
-        <h2 class="text-center" id="dz-instruction" >Drag and Drop files to upload picture</h2>
-        <img src="/assets/loading.gif" alt="loading..." class="center hidden" id="uploading-image" style="padding: 30px;"/>
+        <h2 class="text-center uploading" id="dz-instruction" >Drag and Drop files to upload picture</h2>
+        <!-- <img src="/assets/loading.gif" alt="loading..." class="center hidden" id="uploading-image" style="padding: 30px;"/> -->
+        <div class="progress progress-striped hidden uploading">
+          <div class="progress-bar progress-bar-success" id="progress-bar" role="progressbar" style="width: 0%">
+          </div>
+        </div>
       </div>
       <br />
     </form>
