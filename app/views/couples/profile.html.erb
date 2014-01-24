@@ -37,7 +37,8 @@
 
 <script type="text/template" id="post-template">
   <div class="post">
-    <button class="delete-post close text-right" data-id="<%%= post.id %>" style="margin-right: 5px;">&times;</button>
+    <button class="delete-post close text-right" data-id="<%%= post.id %>" style="margin: 0px 5px 0px 5px;">&times;</button>
+    <a href="/posts/<%%= post.id %>/edit" style="padding-top: 1px; float: right;">Edit Post</a>
     <div class="author-info">
       <%% if (Couplify.u1.id == post.user_id) { %>
         <img src="<%= @u1.profile_image.url(:thumb) %>" alt="<%= @u1.first_name %>" class="author-img" />

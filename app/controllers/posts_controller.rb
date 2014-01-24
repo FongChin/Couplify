@@ -36,4 +36,17 @@ class PostsController < ApplicationController
     end
     redirect_to "/couples/#{params[:profile_name]}"
   end
+  
+  def update
+    @post = Post.find(params[:id])
+    if @post.update_attributes(params[:post])
+    else
+      flash[:alert] = @post.errors.full_messages
+    end
+    redirect_to "/couples/#{current_user.couple.profile_name}"
+  end
+  
+  def edit
+    @post = Post.find(params[:id])
+  end
 end

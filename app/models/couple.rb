@@ -19,14 +19,12 @@ class Couple < ActiveRecord::Base
     (@couples.empty?)? false : true
   end
   
-  def self.get_couple_id(emails)
-    email_arr = emails.split(", ")
-    email_arr.each do |email|
-      next unless email =~ /@couplify.me$/
-      profile_name = email.gsub(/@couplify.me$/, "")
-      couple = Couple.find_by_profile_name(profile_name)
-      return (couple.nil?)? nil : couple.id
-    end
+  def self.get_couple_id(email)
+    email = Mail::Address.new(email).address
+    return nil unless email =~ /@couplify.me$/
+    profile_name = email.gsub(/@couplify.me$/, "")
+    couple = Couple.find_by_profile_name(profile_name)
+    return (couple.nil?)? nil : couple.id
   end
   
   def is_sender_owner?(sender_id)

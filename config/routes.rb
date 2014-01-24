@@ -20,7 +20,7 @@ Couplify::Application.routes.draw do
   end
   
   resource :incoming_email, :only => [:create]
-  resources :posts, :only => [:destroy]
+  resources :posts, :only => [:destroy, :update, :edit]
   root :to => "static_pages#home"
 end
 
