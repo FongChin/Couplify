@@ -62,4 +62,10 @@ class InvitesController < ApplicationController
     end
     
   end
+  
+  def destroy
+    @invite = Invite.find(params[:id])
+    @invite.destroy
+    redirect_to new_invite_url
+  end
 end

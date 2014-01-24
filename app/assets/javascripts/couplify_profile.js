@@ -1,6 +1,14 @@
 (function(root){
   var Couplify = root.Couplify = root.Couplify || {};
   
+  Couplify.delete_post = function(postId, success){
+    $.ajax({
+      type: 'DELETE',
+      url: '/posts/' + postId,
+      success: success
+    })
+  }
+  
   Couplify.insertPosts = insertPosts = function(){
     var data = JSON.parse($('#bootstraped-posts-json').html());
     var postsTemplateCode = $('#posts-template').html();
@@ -67,8 +75,7 @@
   
 })(this);
 
-
-$('document').ready(function(){
+var ready = function(){
   var infiniteScroll = new Couplify.InfiniteScroll(1);
   Couplify.insertPosts();
   Couplify.subscribeToPusherChannel();
@@ -94,7 +101,13 @@ $('document').ready(function(){
     Couplify.delete_post(postId, success);
   })
   
+  $('#export-btn').hover(function(event){
+    $('#export-btn').tooltip('show');
+  });
   var callback = _.throttle(infiniteScroll.fetch.bind(infiniteScroll), 200);
   
   $(window).on("scroll", callback);
-});
+}
+
+$('document').ready(ready);
+$('document').on('page:load', ready);

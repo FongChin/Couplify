@@ -2,6 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.wrapper{
+  width: 930px;
+  display: block;
+  margin: auto;
+}
+
 .box{
   width: 290px;
   display: inline;
@@ -19,14 +25,12 @@
 }
 
 #profile-cover{
-  min-width: 980px;
   height: 400px;
   color: white;
   position: relative;
   overflow: hidden;
   padding-top: 20px;
   text-align: center;
-  padding-left: 12%;
 }
 
 

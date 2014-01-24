@@ -1,26 +1,32 @@
-<div id="profile-cover">
-  <img src="/assets/cover-photo.jpg" alt="" id="cover-photo"/>
-  <div class="box" style="padding-top: 20px;">
-    <%= image_tag @u1.profile_image.url(:medium), :class => "user-profile-img" %>
-    <img src="/assets/heart-shadow.jpg" alt="" id=""/>
-    <h2><%= @u1.first_name.capitalize %></h2>
-  </div>
-  <div class="box">
-    <img src="/assets/red-heart-icon.png" alt="" id="heart-profile-info"/>
-    <div id="profile-info">
-      <p>Email: <br /><span id="profile-name"><%= @couple.profile_name %>@couplify.me</span></p>
-      <p>Anniversary: <br /><span id="anniversary-date"><%= @couple.anniversary_date %></span></p>
+<div class="row" id="profile-cover">
+  <div class="wrapper">
+    <img src="/assets/cover-photo.jpg" alt="" id="cover-photo"/>
+    <div class="box" style="padding-top: 20px;">
+      <%= image_tag @u1.profile_image.url(:medium), :class => "user-profile-img" %>
+      <img src="/assets/heart-shadow.jpg" alt="" id=""/>
+      <h2><%= @u1.first_name.capitalize %></h2>
     </div>
-    <button class="btn btn-primary" id="export-btn">Export Profile as PDF</button>
-  </div>
-  <div class="box" style="padding-top: 20px;">
-    <%= image_tag @u2.profile_image.url(:medium), :class => "user-profile-img" %>
-    <img src="/assets/heart-shadow.jpg" alt="" id=""/>
-    <h2><%= @u2.first_name.capitalize %></h2>
-  </div>
+    <div class="box">
+      <img src="/assets/red-heart-icon.png" alt="" id="heart-profile-info"/>
+      <div id="profile-info">
+        <p>Email: <br /><span id="profile-name"><%= @couple.profile_name %>@couplify.me</span></p>
+        <p>Anniversary: <br /><span id="anniversary-date"><%= @couple.anniversary_date %></span></p>
+      </div>
+  
+      <button data-toggle="tooltip" title="To be implemented" class="btn btn-primary" id="export-btn">Export Profile as PDF</button>
+    </div>
+    <div class="box" style="padding-top: 20px;">
+      <%= image_tag @u2.profile_image.url(:medium), :class => "user-profile-img" %>
+      <img src="/assets/heart-shadow.jpg" alt="" id=""/>
+      <h2><%= @u2.first_name.capitalize %></h2>
+    </div>
+  </div>  
 </div>
 
-<div id="posts-div"></div>
+<div class="row">
+  <div id="posts-div"></div>
+</div>
+
 
 
 <script type="text/template" id="posts-template">

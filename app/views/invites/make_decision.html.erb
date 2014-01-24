@@ -1,18 +1,22 @@
-<% @invites.each do |invite| %>
-  <% inviter = User.find(invite.user_id) %>
-  <p><%= inviter.first_name %> <%= inviter.last_name %> has invited you to have a Couplify profile together.</p>
+<div class="col-xs-9 col-xs-offset-2">
+  <div class="row">
+  <% @invites.each do |invite| %>
+    <% inviter = User.find(invite.user_id) %>
+    <h3><%= inviter.first_name %> <%= inviter.last_name %> has invited you to have a Couplify profile together.</h3>
 
-  <form action="<%= invite_url(invite) %>" method="POST">
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
-    <input type="hidden" value="PUT" name="_method" />
-    <input type="hidden" name="invite[accept_invitation]" value="true" />
-    <button type="submit" class="btn btn-success">Accept</button>
+    <form action="<%= invite_url(invite) %>" method="POST" class="inline-form">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
+      <input type="hidden" value="PUT" name="_method" />
+      <input type="hidden" name="invite[accept_invitation]" value="true" />
+      <button type="submit" class="btn btn-success" style="margin-right: 20px;">Accept</button>
+    </form>
+
+    <form action="<%= invite_url(invite) %>" method="POST" class="inline-form">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
+      <input type="hidden" value="PUT" name="_method" />
+      <input type="hidden" name="invite[accept_invitation]" value="false" />
+      <button type="submit" class="btn btn-danger">Reject</button>
   </form>
-
-  <form action="<%= invite_url(invite) %>" method="POST">
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
-    <input type="hidden" value="PUT" name="_method" />
-    <input type="hidden" name="invite[accept_invitation]" value="false" />
-    <button type="submit" class="btn btn-danger">Reject</button>
-</form>
-<% end %>
+  </div>  
+  <% end %>
+</div>

@@ -699,8 +699,8 @@ pre code {
   }
 }
 .row {
-  margin-left: -15px;
-  margin-right: -15px;
+/*  margin-left: -15px;*/
+/*  margin-right: -15px;*/
 }
 .row:before,
 .row:after {
@@ -4881,7 +4881,7 @@ a.list-group-item.active:focus .list-group-item-text {
 .well {
   min-height: 20px;
   padding: 19px;
-  margin-top: 5px;
+/*  margin-top: 5px;*/
   width: 100%;
   background-color: #e63531;
   border-radius: 4px;

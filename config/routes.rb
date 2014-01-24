@@ -23,3 +23,5 @@ Couplify::Application.routes.draw do
   resources :posts, :only => [:destroy]
   root :to => "static_pages#home"
 end
+
+# resource routing and non-resourceful routes

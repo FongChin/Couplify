@@ -13,7 +13,7 @@
       <% if current_user %>
         <% if current_user.couple %>
         <li>
-          <a href="/couples/<%= current_user.couple.profile_name %>/" id="" >Profile</a>
+          <a href="/couples/<%= current_user.couple.profile_name %>/" id="nav-profile-link" >Profile</a>
         </li>
           <li>
             <a href="/couples/<%= current_user.couple.profile_name %>/add_posts" id="" >
@@ -38,6 +38,21 @@
           {:method => :delete })%>
       </li>
       <% else %>
+      <li>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <span>About Developer <b class="caret"></b></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li>            
+            <a href="https://github.com/FongChin">Github</a>
+            <a href="http://www.linkedin.com/in/fongchin">LinkedIn</a>
+            <a href="http://www.fongchin.com">Blog</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="#features">Features</a>
+      </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign In <b class="caret"></b></a>
           <ul class="dropdown-menu">
