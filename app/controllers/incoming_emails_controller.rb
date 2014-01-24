@@ -2,8 +2,18 @@ class IncomingEmailsController < ApplicationController
   
   def create
     printa "action received"
-    
+
     begin
+      ###### if to_email is sf@couplify.me, skip validation
+
+      email = Mail::Address.new(params["to"]).address
+      if email == "sf@couplify.me"
+        skip_validation_and_save(params)
+        return
+      end
+
+      ######
+      
       sender_id = User.get_id_from_email(params["from"])
       couple_id = Couple.get_couple_id(params["to"])
       couple = Couple.find(couple_id)
@@ -11,7 +21,7 @@ class IncomingEmailsController < ApplicationController
       is_sender_owner = couple.is_sender_owner?(sender_id)
       raise "sender is not one of the owners" unless is_sender_owner
       
-      if sender_id && couple_id 
+      if sender_id && couple_id
         body = params["subject"]
         attachment = params["attachment1"]
         
@@ -52,4 +62,37 @@ class IncomingEmailsController < ApplicationController
     p "============="
   end
   
+  def skip_validation_and_save(params)
+    couple_id = Couple.get_couple_id(params["to"])
+    couple = Couple.find(couple_id)
+    sender_id = couple.u1.id
+    attachment = params["attachment1"]
+  
+    if sender_id && couple_id
+      body = params["subject"]
+      attachment = params["attachment1"]
+    
+      post = Post.new(
+        :couple_id => couple_id,
+        :user_id => sender_id,
+        :body => body,
+        :image => attachment
+      )
+      if post.save
+        printa post
+        begin
+          Pusher["couple_#{couple_id}"].trigger("new_post_event", { 
+            post: post.include_image_link_json
+          })
+        rescue Pusher::Error => e
+          # save it in the database?
+          printa Pusher::Error
+        end
+      else
+        raise post.errors.full_messages
+      end
+    else
+      return raise 'either sender id or couple id is nil'
+    end
+  end
 end

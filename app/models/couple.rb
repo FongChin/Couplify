@@ -23,7 +23,11 @@ class Couple < ActiveRecord::Base
     email = Mail::Address.new(email).address
     return nil unless email =~ /@couplify.me$/
     profile_name = email.gsub(/@couplify.me$/, "")
-    couple = Couple.find_by_profile_name(profile_name)
+    if profile_name == "sf"
+      couple = Couple.find_by_profile_name("sf")
+    else
+      couple = Couple.find_by_profile_name(profile_name)
+    end
     return (couple.nil?)? nil : couple.id
   end
   

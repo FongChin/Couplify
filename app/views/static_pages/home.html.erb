@@ -13,7 +13,18 @@
       <h1 class="logo">Couplify</h1>
     </div>
     <a href="/users/sign_up" class="btn btn-primary">Sign Up</a>
-    <a href="" class="btn btn-primary">Log in as guest</a>
+    <form action="/users/sign_in" method="POST">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+      <input type="hidden" name="user[email]" value="couplify.one@gmail.com" />
+      <input type="hidden" name="user[password]" value="abcdefgh" />
+      <button class="btn btn-primary" type="submit">Log in as guest #1</button>
+    </form>
+    <form action="/users/sign_in" method="POST">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+      <input type="hidden" name="user[email]" value="couplify.two@gmail.com" />
+      <input type="hidden" name="user[password]" value="abcdefgh" />
+      <button class="btn btn-primary" type="submit">Log in as guest #2</button>
+    </form>
     <div style="margin-bottom: 30px;">
       
     </div>    
