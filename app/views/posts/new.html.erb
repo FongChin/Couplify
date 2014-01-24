@@ -3,7 +3,7 @@
   <div id="upload-photo-div" >
     <form action="/couples/<%= @couple.profile_name %>/posts" method="POST" 
           enctype="multipart/form-data"
-          class="dropzone" id="dropzone-form" >
+          class="" id="dropzone-form" >
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
       <div class="dz-default dz-message">
         <h2 class="text-center">Drag and Drop files to upload picture</h2>
@@ -37,4 +37,3 @@
   </div>
 </script>
 
-<script type="text/javascript" src="/assets/posts.js"></script>

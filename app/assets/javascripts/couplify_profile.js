@@ -10,7 +10,10 @@
   }
   
   Couplify.insertPosts = insertPosts = function(){
-    var data = JSON.parse($('#bootstraped-posts-json').html());
+    if ($('#bootstrapped-posts-json').html() == undefined){
+      return
+    }
+    var data = JSON.parse($('#bootstrapped-posts-json').html());
     var postsTemplateCode = $('#posts-template').html();
     var postsTemplateFn = _.template(postsTemplateCode);
 
@@ -54,12 +57,14 @@
   
   InfiniteScroll.prototype.fetch = function(){
     if ($(window).scrollTop() > ($(document).height() - $(window).height())){
-      if (this.numLoads <= this.totalPages && this.totalPages != 1){
+      if (this.numLoads < this.totalPages && this.totalPages != 1){
         var infiniteScroll = this;
         $.ajax({
           type: 'GET',
-          url: '/couples/' + this.coupleId + '/posts/?page=' + this.numLoads,
+          url: '/couples/' + this.coupleId + '/posts/?page=' + (this.numLoads + 1),
           success: function(data){
+            console.log("rendering " + data.length);
+            infiniteScroll.render(data);
             infiniteScroll.numLoads += 1;
           }
         })
@@ -80,11 +85,11 @@ var ready = function(){
   Couplify.insertPosts();
   Couplify.subscribeToPusherChannel();
   
+  Couplify.$posts_container = $('#posts-div');
   Couplify.$posts_container.masonry({
     itemSelector: '.post',
     isAnimated: true,
   });
-  
   Couplify.$posts_container.imagesLoaded(function(){
     Couplify.$posts_container.masonry('reloadItems').masonry('layout');
   });
