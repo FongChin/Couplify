@@ -10,7 +10,7 @@
 ### To-Dos
 - [] convert profile html to PDF
 - [] multiple couplify profiles for a user
-- [x] auto-orient the images as users upload 
+- [] auto-orient the images as users upload 
 - [] ask users to confirm while deleting posts
 - [] add timeline to the profile
 - [] change edit post page to modal
