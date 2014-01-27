@@ -102,6 +102,7 @@ GEM
     mime-types (1.25.1)
     mini_portile (0.5.2)
     multi_json (1.8.4)
+    newrelic_rpm (3.7.1.188)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     oj (2.5.3)
@@ -200,6 +201,7 @@ DEPENDENCIES
   launchy
   letter_opener
   mail
+  newrelic_rpm
   oj
   paperclip
   pdfkit
