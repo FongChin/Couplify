@@ -9,11 +9,11 @@
     <div class="box">
       <img src="/assets/red-heart-icon.png" alt="" id="heart-profile-info"/>
       <div id="profile-info">
-        <p>Email: <br /><span id="profile-name"><%= @couple.profile_name %>@couplify.me</span></p>
+        <p>Email: <br /><span id="profile-name"><%= @couple.profile_name %>@couplify.me</span> <span class="glyphicon glyphicon-info-sign info-tooltip" id="email-info" data-placement="bottom" data-toggle="tooltip" title="Write your message in the subject line and send it to this email address to create a post" ></span></p>
         <p>Anniversary: <br /><span id="anniversary-date"><%= @couple.anniversary_date %></span></p>
       </div>
   
-      <button data-toggle="tooltip" title="To be implemented" class="btn btn-primary" id="export-btn">Export Profile as PDF</button>
+      <button data-toggle="tooltip" title="To be implemented" class="btn btn-primary info-tooltip" id="export-btn">Export Profile as PDF</button>
     </div>
     <div class="box" style="padding-top: 20px;">
       <%= image_tag @u2.profile_image.url(:medium), :class => "user-profile-img" %>

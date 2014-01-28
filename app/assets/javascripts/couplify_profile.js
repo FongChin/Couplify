@@ -106,9 +106,11 @@ var ready = function(){
     Couplify.delete_post(postId, success);
   })
   
-  $('#export-btn').hover(function(event){
-    $('#export-btn').tooltip('show');
+  $('.info-tooltip').hover(function(event){
+    console.log(event.target);
+    $(event.target).tooltip('show');
   });
+  
   var callback = _.throttle(infiniteScroll.fetch.bind(infiniteScroll), 200);
   
   $(window).on("scroll", callback);

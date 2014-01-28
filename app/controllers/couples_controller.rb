@@ -9,6 +9,10 @@ class CouplesController < ApplicationController
     @u1 = User.find(@couple.u1_id)
     @u2 = User.find(@couple.u2_id)
     @num_posts = @couple.posts.count
+    if current_user.email == "couplify.one@gmail.com"
+      # demo account
+      flash[:notice] = "You are signed in through a guest account."
+    end
     render 'profile'
   end
   

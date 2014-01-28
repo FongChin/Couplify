@@ -9,15 +9,18 @@ $(document).ready(function(){
     $('#preview-posts').append(file.previewTemplate);
     $('#preview-posts').imagesLoaded(function(){
       $('#preview-posts').masonry('reloadItems').masonry('layout');
+      $('#dropzone-form').addClass('hidden');
+      $('#put-form').removeClass('hidden');
     });
     // $('#put-form').removeClass('hidden');
   }
 
   var fileProcessingCallback = function(progress, totalBytes, totalBytesSent){
     if (progress == 100){
-      $('#dropzone-form').addClass('hidden');
-      $('#put-form').removeClass('hidden');
+      // $('#dropzone-form').addClass('hidden');
+      // $('#put-form').removeClass('hidden');
     }
+    console.log(progress);
     $('#progress-bar').css('width', progress + '%');
     $('.dz-default').removeClass('dz-message');
     $('.uploading').removeClass('hidden');
